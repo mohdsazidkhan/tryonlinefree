@@ -24,7 +24,19 @@ const articleSchema = new mongoose.Schema({
     content: {
         required: true,
         type: String
+    },
+    userId: {
+        required: true,
+        type: String
+    },
+    userName: {
+        required: true,
+        type: String
+    },
+    userEmail: {
+        required: true,
+        type: String
     }
-})
+}, { timestamps: true })
 
 module.exports = mongoose.model('article', articleSchema)

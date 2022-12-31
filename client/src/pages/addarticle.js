@@ -96,6 +96,11 @@ const AddArticle = () => {
   },[])
 
   const handleArticle = () => {
+    var user = JSON.parse(localStorage.getItem('user'));
+    console.log(user, ' user')
+    let userId = user?._id;
+    let userName = user?.name;
+    let userEmail = user?.email;
     const formData = new FormData();
     formData.append("image", image);
     formData.append("title", title);
@@ -103,6 +108,9 @@ const AddArticle = () => {
     formData.append("categoryName", categoryName);
     formData.append("tags", tags);
     formData.append("content", content);
+    formData.append("userId", userId);
+    formData.append("userName", userName);
+    formData.append("userEmail", userEmail);
     axios({
       method: 'post',
       url: `${variables.BASE_URL}/add-article`,
