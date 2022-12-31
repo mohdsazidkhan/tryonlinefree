@@ -1,3 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 *{
     font-family: 'Roboto Slab', serif;
 }
@@ -50,4 +53,8 @@
 }
 .uploadedImg img{ 
     max-height: 200px;
+}
+.articleBg{
+    background-size: cover;
+    background-position: center;
 }

@@ -20,7 +20,7 @@ const NavBar = props => {
 
 
   return (
-    <NavBarContainer {...props}>
+    <NavBarContainer mx-auto="true" {...props}>
       <Link to="/">
         <Logo style={{ width:'80px', height: '50px' }} />
       </Link>

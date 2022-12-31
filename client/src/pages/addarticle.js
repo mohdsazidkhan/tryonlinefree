@@ -97,7 +97,6 @@ const AddArticle = () => {
 
   const handleArticle = () => {
     var user = JSON.parse(localStorage.getItem('user'));
-    console.log(user, ' user')
     let userId = user?._id;
     let userName = user?.name;
     let userEmail = user?.email;

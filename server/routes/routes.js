@@ -7,31 +7,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const salt = 10;
 const JWT_SECRET = process.env.JWT_SECRET
-const multer = require('multer')
-const { v4: uuidv4 } = require('uuid')
-
-const DIR = './upload';
-
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, DIR);
-    },
-    filename: (req, file, cb) => {
-        const fileName = file.originalname.toLowerCase().split(' ').join('-');
-        cb(null, uuidv4() + '-' + fileName)
-    }
-});
-var upload = multer({
-    storage: storage,
-    fileFilter: (req, file, cb) => {
-        if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
-            cb(null, true);
-        } else {
-            cb(null, false);
-            return cb(new Error('Only .png, .jpg and .jpeg format allowed!'));
-        }
-    }
-});
+const cloudinary = require("../cloudinary");
+const uploader = require("../multer");
 
 router.post('/register', async(req, res) => {
     
@@ -91,12 +68,14 @@ router.post('/login', async(req,res) => {
     }
 })
 
-router.post('/add-article', upload.single('image'), async(req, res) => {
+router.post('/add-article', uploader.single("image"), async(req, res) => {
     if(req.body){
-        const url = req.protocol + '://' + req.get('host');
         let {title, categoryId, categoryName, tags, content, userId, userName, userEmail} = req.body;
+        tags = tags.split(',');
+        const upload = await cloudinary.v2.uploader.upload(req.file.path);
+        let image = upload.secure_url;
         let article = new Article({
-            image: url+'/upload/'+req.file.filename,
+            image,
             title, 
             categoryId, 
             categoryName, 
@@ -135,6 +114,20 @@ router.get('/all-categories', function(req, res) {
             success: true,
             message: 'Categories Get successfully!',
             data: categories
+        });
+      }
+    });
+});
+
+router.get('/all-articles', function(req, res) {
+    Article.find({}, function(err, articles){
+      if (err)
+        return res.send(err);
+      if (articles) {
+        res.status(201).json({
+            success: true,
+            message: 'Articles Get successfully!',
+            data: articles
         });
       }
     });
