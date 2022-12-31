@@ -1,0 +1,53 @@
+*{
+    font-family: 'Roboto Slab', serif;
+}
+.chakra-ui-light td{
+    color: black;
+}
+.addBtn{
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+.ql-editor{
+    min-height: 200px;
+}
+.ql-toolbar.ql-snow .ql-formats {
+    margin-right: 10px !important;
+}
+.tags-input-container{
+    border: 1px solid #fff;
+    padding: .5em;
+    border-radius: 3px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: .5em;
+}
+
+.tag-item{
+    background-color: rgb(14, 13, 27);
+    display: inline-block;
+    padding: .5em .75em;
+    border-radius: 20px;
+}
+.tag-item .close{
+    height: 20px;
+    width: 20px;
+    background-color: rgb(48, 48, 48);
+    color: #fff;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: .5em;
+    font-size: 18px;
+    cursor: pointer;
+}
+.uploadedImg{
+    margin: 10px 0;
+}
+.uploadedImg img{ 
+    max-height: 200px;
+}

@@ -1,0 +1,32 @@
+.leftMenu{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-right: 20px;
+}
+
+.leftMenu a{
+    padding: 12px 10px;
+    border-bottom: 1px solid #fff;
+    display: flex;
+    width: 100%;
+}
+.leftMenu a.active{
+    background: #51c9c5;
+}
+.chakra-ui-light .leftMenu a{
+    border-bottom: 1px solid #ccc;
+}
+.dashGridItem{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.dashGridItem h4{
+    font-size: 40px;
+}
+.dashGridItem p{
+    font-size: medium;
+}
