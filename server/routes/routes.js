@@ -1,7 +1,7 @@
 const express = require('express');
 const User = require('../models/users');
 const Categories = require('../models/categories');
-const Article = require('../models/article');
+const Articles = require('../models/articles');
 const router = express.Router()
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -72,11 +72,17 @@ router.post('/add-article', uploader.single("image"), async(req, res) => {
     if(req.body){
         let {title, categoryId, categoryName, tags, content, userId, userName, userEmail} = req.body;
         tags = tags.split(',');
+
+        var slug = title;
+        slug = slug.replace(/[^a-zA-Z0-9\s]/g,"");
+        slug = slug.toLowerCase();
+        slug = slug.replace(/\s/g,'-');
         const upload = await cloudinary.v2.uploader.upload(req.file.path);
         let image = upload.secure_url;
-        let article = new Article({
+        let article = new Articles({
             image,
             title, 
+            slug,
             categoryId, 
             categoryName, 
             tags, 
@@ -119,8 +125,52 @@ router.get('/all-categories', function(req, res) {
     });
 });
 
+router.get('/all-tags', function(req, res) {
+    Articles.find({}, function(err, articles){
+        if (err)
+          return res.send(err);
+        if (articles) {
+            res.status(201).json({
+                success: true,
+                message: 'Tags Get successfully!',
+                data: articles
+            });
+        }
+    });
+});
+
+router.get('/article/:id', function(req, res) {
+    Articles.findById(req.params.id, function(err, article){
+      if (err)
+          return done(err);
+  
+      if (article) {
+        res.status(201).json({
+            success: true,
+            message: 'Article Get successfully!',
+            data: article
+        });
+      }
+    });
+});
+
+router.get('/category-articles/:id', function(req, res) {
+    Articles.find({categoryId: req.params.id}, function(err, articles){
+      if (err)
+          return done(err);
+  
+      if (articles) {
+        res.status(201).json({
+            success: true,
+            message: 'Article Get successfully!',
+            data: articles
+        });
+      }
+    });
+});
+
 router.get('/all-articles', function(req, res) {
-    Article.find({}, function(err, articles){
+    Articles.find({}, function(err, articles){
       if (err)
         return res.send(err);
       if (articles) {

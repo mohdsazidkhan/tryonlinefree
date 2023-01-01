@@ -58,3 +58,11 @@
     background-size: cover;
     background-position: center;
 }
+.articleDetailBg {
+    background-size: 75%;
+    background-position: center;
+}
+.articleDetailItem{
+    max-width: 800px;
+    margin: auto;
+}

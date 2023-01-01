@@ -15,6 +15,11 @@ import AllArticles from './pages/allarticles';
 import AllTags from './pages/alltags';
 import AllUsers from './pages/allusers';
 import AddArticle from './pages/addarticle';
+import ArticleDetail from './pages/articleDetail';
+import CategoryArticles from './pages/categoryArticles';
+import Categories from './pages/categories';
+import Articles from './pages/articles';
+import Tags from './pages/tags';
 const breakpoints = {
   sm: '320px',
   md: '768px',
@@ -38,6 +43,11 @@ function App() {
           <Route path="/all-tags" element={<AllTags />} />
           <Route path="/all-users" element={<AllUsers />} />
           <Route path="/add-article" element={<AddArticle />} />
+          <Route path="/:category/:slug" element={<ArticleDetail />} />
+          <Route path="/category/:categoryName" element={<CategoryArticles />} />
+          <Route path="/categories" element={<Categories />} />
+          <Route path="/articles" element={<Articles />} />
+          <Route path="/tags" element={<Tags />} />
           {/* <Route path="*" element={ <NoPage /> } /> */}
         </Routes>
     </BrowserRouter>

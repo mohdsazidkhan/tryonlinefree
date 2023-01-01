@@ -81,9 +81,9 @@ const MenuLinks = ({ isOpen, loggedIn }) => {
         direction={['column', 'row', 'row', 'row']}
         pt={[4, 4, 0, 0]}
       >
-        <Link to="/">Articles</Link>
-        <Link to="/"> Categories </Link>
-        <Link to="/"> Tags </Link>
+        <Link to="/articles">Articles</Link>
+        <Link to="/categories"> Categories </Link>
+        <Link to="/tags"> Tags </Link>
         <Link to="/"> Users </Link>
 
         {!loggedIn ?

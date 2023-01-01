@@ -7,45 +7,22 @@ import {
   AlertDescription,
 } from '@chakra-ui/react';
 import axios from 'axios';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { variables } from '../config/config';
 
-const Home = () => {
+const CategoryArticles = () => {
+  const location = useLocation();
+  let categoryId = location?.state?.id;
   const navigate = useNavigate();
   const [showAlert, setShowAlert] = useState(false);
   const [errorType, seErrorType] = useState(false);
   const [message, setMessage] = useState('');
   const [tooltopTitle, setToolTipTitle] = useState('');
-  const [categories, setCategories] = useState([]);
   const [articles, setArticles] = useState([]);
-
-  const getCategories = () => {
-    axios
-      .get(`${variables.BASE_URL}/all-categories`)
-      .then(response => {
-        if (response.data.success) {
-          setToolTipTitle('Success');
-          setMessage(response.data.message);
-          seErrorType(response.data.success);
-          setCategories(response.data.data);
-        }
-      })
-      .catch(error => {
-        if (error.response.data.success === false) {
-          seErrorType(error.response.data.success);
-          setToolTipTitle(error.response.data.error.name);
-          setMessage(error.response.data.error.message);
-          setShowAlert(true);
-          setTimeout(() => {
-            setShowAlert(false);
-          }, 3000);
-        }
-      });
-  };
 
   const getArticles = () => {
     axios
-      .get(`${variables.BASE_URL}/all-articles`)
+      .get(`${variables.BASE_URL}/category-articles/${categoryId}`)
       .then(response => {
         if (response.data.success) {
           setToolTipTitle('Success');
@@ -68,7 +45,6 @@ const Home = () => {
   };
 
   useEffect(() => {
-    getCategories();
     getArticles();
   }, []);
   return (
@@ -94,19 +70,7 @@ const Home = () => {
       )}
       <Navbar />
       <div className="container mx-auto p-5 m-5">
-        <div className="grid grid-cols-4 gap-4">
-          {categories?.map((item, index) => (
-            <Link 
-              to={`/category/${item?.name.toLowerCase()}`}
-              state= {{ id: item._id }}
-              key={index}
-              className="rounded-xl border p-5 text-center category cursor-pointer"
-            >
-              {item?.name}
-            </Link>
-          ))}
-        </div>
-        <div className="grid grid-cols-4 gap-4 mt-10">
+        <div className="grid grid-cols-3 gap-4 mt-10">
           {articles?.map((item, index) => {
             var imgUrl = item?.image
               ? item?.image
@@ -123,7 +87,7 @@ const Home = () => {
                   <Link
                     className="text-green-500 font-semibold cursor-pointer mt-2"
                     to={`/category/${item?.categoryName.toLowerCase()}`}
-                    state = {{ id: item.categoryId }}
+                    state = {{ id: item._id }}
                   >
                     {item?.categoryName}
                   </Link>
@@ -138,7 +102,7 @@ const Home = () => {
                     {item?.tags.map((sitem, index) => {
                       return (
                         <Link
-                        to={`/tag/${sitem}`}
+                        to={`/hashtag/${sitem}`}
                         state = {{ id: item._id }}
                         className="text-cyan-400 cursor-pointer"
                         key={index}
@@ -158,4 +122,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default CategoryArticles;

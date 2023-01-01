@@ -9,6 +9,10 @@ const articleSchema = new mongoose.Schema({
         required: true,
         type: String
     },
+    slug: {
+        required: true,
+        type: String
+    },
     categoryId: {
         required: true,
         type: String
