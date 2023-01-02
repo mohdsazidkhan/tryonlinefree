@@ -20,6 +20,7 @@ import CategoryArticles from './pages/categoryArticles';
 import Categories from './pages/categories';
 import Articles from './pages/articles';
 import Tags from './pages/tags';
+import TagPosts from './pages/tagPosts';
 const breakpoints = {
   sm: '320px',
   md: '768px',
@@ -48,6 +49,7 @@ function App() {
           <Route path="/categories" element={<Categories />} />
           <Route path="/articles" element={<Articles />} />
           <Route path="/tags" element={<Tags />} />
+          <Route path="/tag/:tag" element={<TagPosts />} />
           {/* <Route path="*" element={ <NoPage /> } /> */}
         </Routes>
     </BrowserRouter>

@@ -136,7 +136,7 @@ router.get('/all-tags', function(req, res) {
                 data: articles
             });
         }
-    });
+    }).projection({tags: 1});
 });
 
 router.get('/article/:id', function(req, res) {
@@ -167,6 +167,21 @@ router.get('/category-articles/:id', function(req, res) {
         });
       }
     });
+});
+
+router.get('/tag-articles/:tag', async function(req, res) {
+    let articles = await Articles.find({});
+     articles = articles.filter(function(elm){
+        return elm.tags.indexOf(req.params.tag)>=0
+      });
+    console.log(articles, ' articles')
+    if (articles) {
+      res.status(201).json({
+       success: true,
+        message: 'Article Get successfully!',
+        data: articles
+      });
+    }
 });
 
 router.get('/all-articles', function(req, res) {

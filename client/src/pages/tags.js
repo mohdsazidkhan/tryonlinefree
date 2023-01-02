@@ -42,7 +42,14 @@ const Tags = () => {
       });
   };
 
-  
+  const uniqueTags = [];
+  {tags?.map(item => {
+    item.tags.map(sitem => {
+      if(uniqueTags.indexOf(sitem) === -1) {
+        uniqueTags.push(sitem)
+      }
+    });
+  })}
 
   useEffect(() => {
     getTags();
@@ -70,21 +77,19 @@ const Tags = () => {
       )}
       <Navbar />
       <div className="container mx-auto p-5 m-5">
-          {tags?.map(item => 
-            <div className="grid grid-cols-4 gap-4" key={item._id}>
-             {item?.tags?.map((sitem, index) => (
-              <Link 
-                to={`/tag/${sitem.toLowerCase()}`}
-                state= {{ tag: sitem }}
-                key={index}
-                className="rounded-xl border p-5 text-center category cursor-pointer"
-              >
-                #{sitem}
-              </Link>
-             ))}
-            </div>
+        <div className="grid grid-cols-4 gap-4" >
+          {uniqueTags?.map((item, index) => 
+            <Link 
+            key={index}
+              to={`/tag/${item.toLowerCase()}`}
+              state= {{ tag: item }}
+              className="rounded-xl border p-5 text-center category cursor-pointer"
+            >
+              #{item}
+            </Link>
           )}
         </div>
+      </div>
     </>
   );
 };
