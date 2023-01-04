@@ -32,7 +32,7 @@ const theme = extendTheme({ breakpoints })
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <BrowserRouter>
+      <BrowserRouter basename='/'>
         <Routes>
           <Route exact path='/' element={<Home />} />
           <Route exact path="/login" element={<Login />} />
