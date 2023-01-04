@@ -14,9 +14,6 @@ server.pnp.js
 # testing
 server/coverage
 
-# production
-client/build
-
 # misc
 .DS_Store
 client/.env.local
