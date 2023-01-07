@@ -1,7 +1,17 @@
 .chakra-ui-light a{
-    color: black;
+    color: #333;
 }
 .chakra-ui-light button{
     background: #55c9c7;
     color: #fff;
+}
+.chakra-ui-light .mainMenu{
+    background: #fff;
+}
+.chakra-ui-dark .mainMenu{
+    background: #1A202C;
+}
+.chakra-ui-light .menuBar svg,
+.chakra-ui-light .menuClose svg path{
+    fill: #6c6c6c;
 }

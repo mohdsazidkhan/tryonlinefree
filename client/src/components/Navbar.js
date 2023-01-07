@@ -55,7 +55,7 @@ const MenuIcon = () => (
 
 const MenuToggle = ({ toggle, isOpen }) => {
   return (
-    <Box display={{ base: 'block', md: 'none' }} onClick={toggle}>
+    <Box className={isOpen ? 'menuClose' : 'menuBar'} display={{ base: 'block', md: 'none' }} onClick={toggle}>
       {isOpen ? <CloseIcon /> : <MenuIcon />}
     </Box>
   );
@@ -80,6 +80,7 @@ const MenuLinks = ({ isOpen, loggedIn }) => {
         justify={['center', 'space-between', 'flex-end', 'flex-end']}
         direction={['column', 'row', 'row', 'row']}
         pt={[4, 4, 0, 0]}
+        className="mainMenu"
       >
         <Link to="/articles">Articles</Link>
         <Link to="/categories"> Categories </Link>

@@ -77,10 +77,10 @@ const Tags = () => {
       )}
       <Navbar />
       <div className="container mx-auto p-5 m-5">
-        <div className="grid grid-cols-4 gap-4" >
+        <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-4" >
           {uniqueTags?.map((item, index) => 
             <Link 
-            key={index}
+              key={index}
               to={`/tag/${item.toLowerCase()}`}
               state= {{ tag: item }}
               className="rounded-xl border p-5 text-center category cursor-pointer"

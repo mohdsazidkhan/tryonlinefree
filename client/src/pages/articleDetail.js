@@ -7,7 +7,7 @@ import {
   AlertDescription,
 } from '@chakra-ui/react';
 import axios from 'axios';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { variables } from '../config/config';
 import moment from 'moment';
 import {
@@ -87,38 +87,40 @@ const ArticleDetail = () => {
       <Navbar />
       <div className="container mx-auto p-5 m-5">
         <div className="articleDetailItem shadow border rounded-md">
-          
-
           <div className="rounded-md px-5 py-2">
             <div className="flex flex-col">
-                <div
-                className="text-green-600 cursor-pointer mt-2"
-                onClick={() =>
-                    navigate(`/category/${article?.categoryName.toLowerCase()}`)
-                }
-                >
+              <Link
+                to={`/category/${article?.categoryName?.toLowerCase()}`}
+                state={{ id: article?.categoryId }}
+                className="text-green-600 mt-2"
+              >
                 {article?.categoryName}
-                </div>
-                <h2 className="text-xl font-semibold">{article?.title}</h2>
-                <div className="text-indigo-600 mt-2">
+              </Link>
+              <h2 className="text-xl font-semibold">{article?.title}</h2>
+              <div className="text-indigo-600 mt-2">
                 Published at:{' '}
                 {moment(article?.createdAt).format('DD MMM YYYY h:mm A')} by{' '}
                 <span
-                    className="text-red-600 cursor-pointer"
-                    onClick={() => navigate(`/user/${article?.userName}`)}
+                  className="text-red-600 cursor-pointer"
+                  onClick={() => navigate(`/user/${article?.userName.toLowerCase()}`)}
                 >
-                    {article?.userName}
+                  {article?.userName}
                 </span>
-                </div>
-                <div>
+              </div>
+              <div>
                 {article?.tags?.map((sitem, index) => {
-                    return (
-                    <span className="text-cyan-600 cursor-pointer" key={index}>
-                        #{sitem}{' '}
-                    </span>
-                    );
+                  return (
+                    <Link
+                      key={index}
+                      to={`/tag/${sitem.toLowerCase()}`}
+                      state={{ tag: sitem }}
+                      className="p-1 text-teal-600"
+                    >
+                      #{sitem}
+                    </Link>
+                  );
                 })}
-                </div>
+              </div>
             </div>
             <hr className="my-4" />
             <div className="socialShares flex justify-between items-center">
@@ -231,15 +233,21 @@ const ArticleDetail = () => {
                 quote={article?.title}
                 className="shareButton"
               >
-                <svg viewBox="0 0 64 64" width="32" height="32"><circle cx="32" cy="32" r="31" fill="#cb2128"></circle><path d="M32,16c-8.8,0-16,7.2-16,16c0,6.6,3.9,12.2,9.6,14.7c0-1.1,0-2.5,0.3-3.7 c0.3-1.3,2.1-8.7,2.1-8.7s-0.5-1-0.5-2.5c0-2.4,1.4-4.1,3.1-4.1c1.5,0,2.2,1.1,2.2,2.4c0,1.5-0.9,3.7-1.4,5.7 c-0.4,1.7,0.9,3.1,2.5,3.1c3,0,5.1-3.9,5.1-8.5c0-3.5-2.4-6.1-6.7-6.1c-4.9,0-7.9,3.6-7.9,7.7c0,1.4,0.4,2.4,1.1,3.1 c0.3,0.3,0.3,0.5,0.2,0.9c-0.1,0.3-0.3,1-0.3,1.3c-0.1,0.4-0.4,0.6-0.8,0.4c-2.2-0.9-3.3-3.4-3.3-6.1c0-4.5,3.8-10,11.4-10 c6.1,0,10.1,4.4,10.1,9.2c0,6.3-3.5,11-8.6,11c-1.7,0-3.4-0.9-3.9-2c0,0-0.9,3.7-1.1,4.4c-0.3,1.2-1,2.5-1.6,3.4 c1.4,0.4,3,0.7,4.5,0.7c8.8,0,16-7.2,16-16C48,23.2,40.8,16,32,16z" fill="white"></path></svg>
+                <svg viewBox="0 0 64 64" width="32" height="32">
+                  <circle cx="32" cy="32" r="31" fill="#cb2128"></circle>
+                  <path
+                    d="M32,16c-8.8,0-16,7.2-16,16c0,6.6,3.9,12.2,9.6,14.7c0-1.1,0-2.5,0.3-3.7 c0.3-1.3,2.1-8.7,2.1-8.7s-0.5-1-0.5-2.5c0-2.4,1.4-4.1,3.1-4.1c1.5,0,2.2,1.1,2.2,2.4c0,1.5-0.9,3.7-1.4,5.7 c-0.4,1.7,0.9,3.1,2.5,3.1c3,0,5.1-3.9,5.1-8.5c0-3.5-2.4-6.1-6.7-6.1c-4.9,0-7.9,3.6-7.9,7.7c0,1.4,0.4,2.4,1.1,3.1 c0.3,0.3,0.3,0.5,0.2,0.9c-0.1,0.3-0.3,1-0.3,1.3c-0.1,0.4-0.4,0.6-0.8,0.4c-2.2-0.9-3.3-3.4-3.3-6.1c0-4.5,3.8-10,11.4-10 c6.1,0,10.1,4.4,10.1,9.2c0,6.3-3.5,11-8.6,11c-1.7,0-3.4-0.9-3.9-2c0,0-0.9,3.7-1.1,4.4c-0.3,1.2-1,2.5-1.6,3.4 c1.4,0.4,3,0.7,4.5,0.7c8.8,0,16-7.2,16-16C48,23.2,40.8,16,32,16z"
+                    fill="white"
+                  ></path>
+                </svg>
               </PinterestShareButton>
             </div>
             <hr className="my-4" />
             <div
-            className="rounded-md articleDetailBg h-96 mt-5"
-            style={{ backgroundImage: 'url(' + imgUrl + ')' }}
+              className="rounded-md articleDetailBg mt-5"
+              style={{ backgroundImage: 'url(' + imgUrl + ')' }}
             ></div>
-            
+
             <hr className="my-4" />
             <div dangerouslySetInnerHTML={{ __html: article?.content }} />
           </div>

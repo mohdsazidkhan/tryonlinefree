@@ -59,10 +59,41 @@
     background-position: center;
 }
 .articleDetailBg {
-    background-size: 75%;
+    background-size: cover;
     background-position: center;
+    height: 24rem;
+    background-repeat: no-repeat;
 }
 .articleDetailItem{
     max-width: 800px;
     margin: auto;
+}
+@media screen and (max-width:786px){
+    .articleDetailBg {
+        height: 10rem;
+    }
+    .mainMenu{
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        flex-direction: column !important;
+        width: 100%;
+        z-index: 9;
+        justify-content: start !important;
+        align-items: flex-start !important;
+        
+    }
+    .mainMenu a{
+        margin-inline-start: 0 !important;
+        padding: 15px 25px;
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+    .menuClose{
+        position: absolute;
+        right: 24px;
+        z-index: 99;
+    }
 }

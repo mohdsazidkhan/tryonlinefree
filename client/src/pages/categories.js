@@ -70,7 +70,7 @@ const Categories = () => {
       )}
       <Navbar />
       <div className="container mx-auto p-5 m-5">
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {categories?.map((item, index) => (
             <Link 
               to={`/category/${item?.name.toLowerCase()}`}

@@ -94,7 +94,7 @@ const Home = () => {
       )}
       <Navbar />
       <div className="container mx-auto p-5 m-5">
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {categories?.map((item, index) => (
             <Link 
               to={`/category/${item?.name.toLowerCase()}`}
@@ -106,7 +106,7 @@ const Home = () => {
             </Link>
           ))}
         </div>
-        <div className="grid grid-cols-4 gap-4 mt-10">
+        <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-10">
           {articles?.map((item, index) => {
             var imgUrl = item?.image
               ? item?.image
