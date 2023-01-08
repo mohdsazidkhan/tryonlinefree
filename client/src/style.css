@@ -68,9 +68,32 @@
     max-width: 800px;
     margin: auto;
 }
+.sideBar{
+    width: 220px;
+}
 @media screen and (max-width:786px){
     .articleDetailBg {
         height: 10rem;
+    }
+    .mainContent{
+        display: block !important;
+        margin-top: 20px;
+    }
+    .content{
+        display: block !important;
+        margin-top: 20px;
+    }
+    .leftMenu{
+        margin-right: 0;
+    }
+    .dashboardGrids{
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+    .addBtn {
+        margin-bottom: 0;
+    }
+    .sideBar {
+        width: 100%;
     }
     .mainMenu{
         position: fixed;
@@ -81,7 +104,7 @@
         width: 100%;
         z-index: 9;
         justify-content: start !important;
-        align-items: flex-start !important;
+        align-items: center !important;
         
     }
     .mainMenu a{
@@ -90,6 +113,9 @@
         display: block;
         width: 100%;
         text-align: center;
+    }
+    .mainMenu button{
+        margin-inline-start: 0 !important;
     }
     .menuClose{
         position: absolute;

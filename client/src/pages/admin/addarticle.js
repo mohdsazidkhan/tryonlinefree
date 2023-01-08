@@ -23,6 +23,7 @@ import { variables } from '../../config/config'
 import ReactQuill from 'react-quill';
 import EditorToolbar, { modules, formats } from "./EditorToolbar";
 import 'react-quill/dist/quill.snow.css';
+import Sidebar from './sidebar';
 
 const AddArticle = () => {
 
@@ -179,20 +180,12 @@ const AddArticle = () => {
       <Navbar />
       <Container
         maxW="lg"
-        maxWidth={{ lg: '1400px', md: '1000px', sm: '600px' }}
+        maxWidth={{ lg: '1400px', md: '1000px', sm: '100%' }}
         marginTop={'20px'}
       >
-        <Flex color="white">
-          <Box w="220px">
-            <div className="leftMenu">
-              <NavLink to="/dashboard" activeclassname="active">Dashboard</NavLink>
-              <NavLink to="/all-categories" activeclassname="active">Categories</NavLink>
-              <NavLink to="/all-articles" activeclassname="active">Articles</NavLink>
-              <NavLink to="/all-tags" activeclassname="active">Tags</NavLink>
-              <NavLink to="/all-users" activeclassname="active">Users</NavLink>
-            </div>
-          </Box>
-          <Box flex="1">
+        <Flex color="white" className='mainContent pb-5'>
+          <Sidebar/>
+          <Box flex="1" className='content'>
           <Heading textAlign='center' color="teal.400">Add Article</Heading>
           <Box maxW={{ base: '100%' }}>
             <form>

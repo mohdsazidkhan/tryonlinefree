@@ -5,6 +5,7 @@ import './dashboard.css';
 import { variables } from '../../config/config';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import Sidebar from './sidebar';
 const Dashboard = () => {
 
   const [categories, setCategories] = useState([]);
@@ -87,18 +88,10 @@ const Dashboard = () => {
         maxWidth={{ lg: '1400px', md: '1000px', sm: '600px' }}
         marginTop={'20px'}
       >
-        <Flex color="white">
-          <Box w="220px">
-            <div className="leftMenu">
-              <NavLink to="/dashboard" activeclassname="active">Dashboard</NavLink>
-              <NavLink to="/all-categories" activeclassname="active">Categories</NavLink>
-              <NavLink to="/all-articles" activeclassname="active">Articles</NavLink>
-              <NavLink to="/all-tags" activeclassname="active">Tags</NavLink>
-              <NavLink to="/all-users" activeclassname="active">Users</NavLink>
-            </div>
-          </Box>
-          <Box flex="1">
-            <Grid templateColumns="repeat(4, 1fr)" gap={6}>
+        <Flex color="white" className='mainContent pb-5'>
+        <Sidebar/>
+          <Box flex="1" className='content'>
+            <Grid className='dashboardGrids' templateColumns="repeat(4, 1fr)" gap={6}>
               <GridItem className='dashGridItem' borderRadius={4} w="100%" h="100" bg="blue.600">
                 <h4>{categories?.length}</h4>
                 <p>Categories</p>
@@ -116,7 +109,7 @@ const Dashboard = () => {
                 <p>Users</p>
               </GridItem>
             </Grid>
-            <Grid templateColumns="repeat(4, 1fr)" gap={6} marginTop='30px'>
+            <Grid className='dashboardGrids' templateColumns="repeat(4, 1fr)" gap={6} marginTop='30px'>
               <GridItem textAlign={'center'}>
                 <Link to='/all-categories'>Go to Categories</Link>
               </GridItem>

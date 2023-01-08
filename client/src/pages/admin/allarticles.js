@@ -22,6 +22,7 @@ import { EditIcon, DeleteIcon } from '@chakra-ui/icons';
 import axios from 'axios';
 import { variables } from '../../config/config';
 import moment from 'moment';
+import Sidebar from './sidebar';
 
 const AllArticles = () => {
   const [showAlert, setShowAlert] = useState(false);
@@ -84,27 +85,9 @@ const AllArticles = () => {
         maxWidth={{ lg: '1400px', md: '1000px', sm: '600px' }}
         marginTop={'20px'}
       >
-        <Flex color="white">
-          <Box w="220px">
-            <div className="leftMenu">
-              <NavLink to="/dashboard" activeclassname="active">
-                Dashboard
-              </NavLink>
-              <NavLink to="/all-categories" activeclassname="active">
-                Categories
-              </NavLink>
-              <NavLink to="/all-articles" activeclassname="active">
-                Articles
-              </NavLink>
-              <NavLink to="/all-tags" activeclassname="active">
-                Tags
-              </NavLink>
-              <NavLink to="/all-users" activeclassname="active">
-                Users
-              </NavLink>
-            </div>
-          </Box>
-          <Box flex="1">
+        <Flex color="white" className='mainContent pb-5'>
+        <Sidebar/>
+          <Box flex="1" className='content'>
           <div className='flex justify-between items-center pb-5 px-5'>
             <div className='text-green-500'>Articles</div>
             <div className='text-yellow-500'>{articles?.length}</div>
