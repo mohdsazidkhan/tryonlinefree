@@ -85,7 +85,7 @@ const MenuLinks = ({ isOpen, loggedIn }) => {
         <Link to="/articles">Articles</Link>
         <Link to="/categories"> Categories </Link>
         <Link to="/tags"> Tags </Link>
-        <Link to="/"> Users </Link>
+        <Link to="/users"> Users </Link>
 
         {!loggedIn ?
         <>

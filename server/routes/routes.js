@@ -9,6 +9,7 @@ const salt = 10;
 const JWT_SECRET = process.env.JWT_SECRET
 const cloudinary = require("../cloudinary");
 const uploader = require("../multer");
+const mongoose = require('mongoose');
 
 router.post('/register', async(req, res) => {
     
@@ -67,6 +68,17 @@ router.post('/login', async(req,res) => {
         res.json(response);
     }
 })
+
+router.get('/user-detail/:userId', async function(req, res) {
+    let user = await User.findById(req?.params?.userId).select("-password");
+    if (user) {
+      res.status(201).json({
+       success: true,
+        message: 'User Detail Get successfully!',
+        data: user
+      });
+    }
+});
 
 router.post('/add-article', uploader.single("image"), async(req, res) => {
     if(req.body){
@@ -142,8 +154,9 @@ router.get('/all-tags', function(req, res) {
 router.get('/article/:id', function(req, res) {
     Articles.findById(req.params.id, function(err, article){
       if (err)
-          return done(err);
-  
+        res.status(201).json({
+            err
+        });
       if (article) {
         res.status(201).json({
             success: true,
@@ -171,10 +184,21 @@ router.get('/category-articles/:id', function(req, res) {
 
 router.get('/tag-articles/:tag', async function(req, res) {
     let articles = await Articles.find({});
-     articles = articles.filter(function(elm){
-        return elm.tags.indexOf(req.params.tag)>=0
+     articles = articles?.filter(function(elm){
+        return elm?.tags?.indexOf(req?.params?.tag.toLowerCase())>=0
       });
     console.log(articles, ' articles')
+    if (articles) {
+      res.status(201).json({
+       success: true,
+        message: 'Article Get successfully!',
+        data: articles
+      });
+    }
+});
+
+router.get('/user-articles/:userId', async function(req, res) {
+    let articles = await Articles.find({userId: req?.params?.userId});
     if (articles) {
       res.status(201).json({
        success: true,
@@ -198,18 +222,32 @@ router.get('/all-articles', function(req, res) {
     });
 });
 
+router.get('/all-users', function(req, res) {
+    User.find({}, function(err, users){
+      if (err)
+        return res.send(err);
+      if (users) {
+        res.status(201).json({
+            success: true,
+            message: 'Users Get successfully!',
+            data: users
+        });
+      }
+    }).select("-password");
+});
+
 const verifyUserLogin = async (email,password)=>{
     
     try {
         const user = await User.findOne({email}).lean()
         
         if(!user){
-            return {status:'error',error:'user not found'}
+            return {status:'error', error:'user not found'}
         }
-        if(await bcrypt.compare(password,user.password)){
+        if(await bcrypt.compare(password, user.password)){
             
             // creating a JWT token
-            token = jwt.sign({id:user._id,username:user.email,type:'user'},JWT_SECRET,{ expiresIn: '2h'})
+            token = jwt.sign({id:user._id, username:user.email, type:'user'}, JWT_SECRET, { expiresIn: '2h'})
 
             return {
                 status: true,
