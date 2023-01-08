@@ -9,6 +9,7 @@ import Login from './pages/auth/login'
 import Register from './pages/auth/register'
 import ForgotPassword from './pages/auth/forgotpassword'
 import Dashboard from './pages/admin/dashboard';
+import Profile from './pages/admin/profile';
 import './style.css'
 import AllCategories from './pages/admin/allcategories';
 import AllArticles from './pages/admin/allarticles';
@@ -54,6 +55,7 @@ function App() {
           <Route path="/tags" element={<Tags />} />
           <Route path="/tag/:tag" element={<TagPosts />} />
           <Route path="/user/profile/:userId" element={<UserProfile />} />
+          <Route path="/profile" element={<Profile />} />
           {/* <Route path="*" element={ <NoPage /> } /> */}
         </Routes>
     </BrowserRouter>

@@ -9,6 +9,7 @@ return(<Box className='sideBar'>
               <NavLink to="/all-articles" activeclassname="active">Articles</NavLink>
               <NavLink to="/all-tags" activeclassname="active">Tags</NavLink>
               <NavLink to="/all-users" activeclassname="active">Users</NavLink>
+              <NavLink to="/profile" activeclassname="active">Profile</NavLink>
             </div>
           </Box>
 )
