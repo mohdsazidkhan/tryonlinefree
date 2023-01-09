@@ -7,6 +7,22 @@
 .chakra-ui-light td{
     color: black;
 }
+.chakra-ui-light .tags-input-container input,
+.chakra-ui-light .chakra-select,
+.chakra-ui-light .chakra-select>option{
+    color: black !important;
+}
+.chakra-ui-dark .tags-input-container input,
+.chakra-ui-dark .chakra-select,
+.chakra-ui-dark .chakra-select>option{
+    color: white !important;
+}
+.chakra-ui-light .tags-input-container{
+    border: 1px solid #CBD5E0;
+}
+.chakra-ui-dark .tags-input-container{
+    border: 1px solid #fff;
+}
 .addBtn{
     display: flex;
     justify-content: flex-end;
@@ -19,7 +35,6 @@
     margin-right: 10px !important;
 }
 .tags-input-container{
-    border: 1px solid #fff;
     padding: .5em;
     border-radius: 3px;
     width: 100%;

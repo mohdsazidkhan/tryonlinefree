@@ -7,11 +7,11 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Sidebar from './sidebar';
 const Dashboard = () => {
-
   const [categories, setCategories] = useState([]);
   const [articles, setArticles] = useState([]);
   const [tags, setTags] = useState([]);
   const [users, setUsers] = useState([]);
+  const [userType, setUserType] = useState('');
 
   const getUsers = () => {
     axios
@@ -22,7 +22,7 @@ const Dashboard = () => {
         }
       })
       .catch(error => {
-        console.log(error)
+        console.log(error);
       });
   };
 
@@ -35,7 +35,7 @@ const Dashboard = () => {
         }
       })
       .catch(error => {
-        console.log(error)
+        console.log(error);
       });
   };
 
@@ -48,7 +48,7 @@ const Dashboard = () => {
         }
       })
       .catch(error => {
-        console.log(error)
+        console.log(error);
       });
   };
 
@@ -61,24 +61,29 @@ const Dashboard = () => {
         }
       })
       .catch(error => {
-        console.log(error)
+        console.log(error);
       });
   };
 
   const uniqueTags = [];
-  {tags?.map(item => {
-    item.tags.map(sitem => {
-      if(uniqueTags.indexOf(sitem) === -1) {
-        uniqueTags.push(sitem)
-      }
+  {
+    tags?.map(item => {
+      item.tags.map(sitem => {
+        if (uniqueTags.indexOf(sitem) === -1) {
+          uniqueTags.push(sitem);
+        }
+      });
     });
-  })}
+  }
 
   useEffect(() => {
     getCategories();
     getArticles();
     getTags();
     getUsers();
+    let user = JSON.parse(localStorage.getItem('user'));
+    const userT = user.userType;
+    setUserType(userT);
   }, []);
   return (
     <>
@@ -88,42 +93,107 @@ const Dashboard = () => {
         maxWidth={{ lg: '1400px', md: '1000px', sm: '600px' }}
         marginTop={'20px'}
       >
-        <Flex color="white" className='mainContent pb-5'>
-        <Sidebar/>
-          <Box flex="1" className='content'>
-            <Grid className='dashboardGrids' templateColumns="repeat(4, 1fr)" gap={6}>
-              <GridItem className='dashGridItem' borderRadius={4} w="100%" h="100" bg="blue.600">
-                <h4>{categories?.length}</h4>
-                <p>Categories</p>
-              </GridItem>
-              <GridItem className='dashGridItem' borderRadius={4} w="100%" h="100" bg="orange.600">
-                <h4>{articles?.length}</h4>
-                <p>Articles</p>
-              </GridItem>
-              <GridItem className='dashGridItem' borderRadius={4} w="100%" h="100" bg="red.600">
-                <h4>{uniqueTags?.length}</h4>
-                <p>Tags</p>
-              </GridItem>
-              <GridItem className='dashGridItem' borderRadius={4} w="100%" h="100" bg="green.600">
-                <h4>{users?.length}</h4>
-                <p>Users</p>
-              </GridItem>
-            </Grid>
-            <Grid className='dashboardGrids' templateColumns="repeat(4, 1fr)" gap={6} marginTop='30px'>
-              <GridItem textAlign={'center'}>
-                <Link to='/all-categories'>Go to Categories</Link>
-              </GridItem>
-              <GridItem textAlign={'center'}>
-                <Link to='/all-articles'>Go to Articles</Link>
-              </GridItem>
-              <GridItem textAlign={'center'}>
-                <Link to='/all-tags'>Go to Tags</Link>
-              </GridItem>
-              <GridItem textAlign={'center'}>
-                <Link to='/all-users'>Go to Users</Link>
-              </GridItem>
-            </Grid>
-          </Box>
+        <Flex color="white" className="mainContent pb-5">
+          <Sidebar />
+          {userType === 'admin' ? (
+            <Box flex="1" className="content">
+              <Grid
+                className="dashboardGrids"
+                templateColumns="repeat(4, 1fr)"
+                gap={6}
+              >
+                <GridItem
+                  className="dashGridItem"
+                  borderRadius={4}
+                  w="100%"
+                  h="100"
+                  bg="blue.600"
+                >
+                  <h4>{categories?.length}</h4>
+                  <p>Categories</p>
+                </GridItem>
+                <GridItem
+                  className="dashGridItem"
+                  borderRadius={4}
+                  w="100%"
+                  h="100"
+                  bg="orange.600"
+                >
+                  <h4>{articles?.length}</h4>
+                  <p>Articles</p>
+                </GridItem>
+                <GridItem
+                  className="dashGridItem"
+                  borderRadius={4}
+                  w="100%"
+                  h="100"
+                  bg="red.600"
+                >
+                  <h4>{uniqueTags?.length}</h4>
+                  <p>Tags</p>
+                </GridItem>
+                <GridItem
+                  className="dashGridItem"
+                  borderRadius={4}
+                  w="100%"
+                  h="100"
+                  bg="green.600"
+                >
+                  <h4>{users?.length}</h4>
+                  <p>Users</p>
+                </GridItem>
+              </Grid>
+              <Grid
+                className="dashboardGrids"
+                templateColumns="repeat(4, 1fr)"
+                gap={6}
+                marginTop="30px"
+              >
+                <GridItem textAlign={'center'}>
+                  <Link to="/all-categories">Go to Categories</Link>
+                </GridItem>
+                <GridItem textAlign={'center'}>
+                  <Link to="/all-articles">Go to Articles</Link>
+                </GridItem>
+                <GridItem textAlign={'center'}>
+                  <Link to="/all-tags">Go to Tags</Link>
+                </GridItem>
+                <GridItem textAlign={'center'}>
+                  <Link to="/all-users">Go to Users</Link>
+                </GridItem>
+              </Grid>
+            </Box>
+          ) : (
+            <Box flex="1" className="content">
+              <Grid
+                className="dashboardGrids"
+                templateColumns="repeat(1, 1fr)"
+                gap={6}
+              >
+                <GridItem
+                  className="dashGridItem"
+                  borderRadius={4}
+                  w="100%"
+                  h="100"
+                  bg="orange.600"
+                >
+                  <h4>{articles?.length}</h4>
+                  <p>Articles</p>
+                </GridItem>
+                
+              </Grid>
+              <Grid
+                className="dashboardGrids"
+                templateColumns="repeat(1, 1fr)"
+                gap={6}
+                marginTop="30px"
+              >
+                <GridItem textAlign={'center'}>
+                  <Link to="/all-articles">Go to Articles</Link>
+                </GridItem>
+              </Grid>
+            </Box>
+          )}
         </Flex>
       </Container>
     </>

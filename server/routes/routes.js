@@ -257,6 +257,7 @@ const verifyUserLogin = async (email,password)=>{
                     name: user.name,
                     email: user.email,
                     phone: user.phone,
+                    userType: user.userType,
                     token: token,
                 }
             }

@@ -218,7 +218,8 @@ const AddArticle = () => {
                   </InputGroup>
                 </FormControl>
                 <FormControl>
-                 <Select placeholder='Select Category' onChange={handleCategoryChange}>
+                 <Select onChange={handleCategoryChange}>
+                  <option selected value=''>Select Category</option>
                   {categories?.map((item, index) =>
                     <option key={index} value={item?._id}>{item?.name}</option>
                   )}
