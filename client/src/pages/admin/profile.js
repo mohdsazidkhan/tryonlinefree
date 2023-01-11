@@ -105,6 +105,7 @@ const Profile = () => {
                 placeholder="Enter Name"
                 _placeholder={{ color: 'gray.500' }}
                 type="text"
+                defaultValue={userDetail?.name}
               />
             </FormControl>
             <FormControl className='my-2' id="email" isRequired>
@@ -113,6 +114,7 @@ const Profile = () => {
                 placeholder="your-email@example.com"
                 _placeholder={{ color: 'gray.500' }}
                 type="email"
+                defaultValue={userDetail?.email}
               />
             </FormControl>
             <FormControl  className='my-2' id="phone" isRequired>
@@ -121,6 +123,7 @@ const Profile = () => {
                 placeholder="Enter Phone no."
                 _placeholder={{ color: 'gray.500' }}
                 type="text"
+                defaultValue={userDetail?.phone}
               />
             </FormControl>
             <FormControl  className='my-2' id="password" isRequired>

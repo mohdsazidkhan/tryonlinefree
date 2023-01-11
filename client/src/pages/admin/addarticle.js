@@ -219,7 +219,7 @@ const AddArticle = () => {
                 </FormControl>
                 <FormControl>
                  <Select onChange={handleCategoryChange}>
-                  <option selected value=''>Select Category</option>
+                  <option defaultValue='' value=''>Select Category</option>
                   {categories?.map((item, index) =>
                     <option key={index} value={item?._id}>{item?.name}</option>
                   )}

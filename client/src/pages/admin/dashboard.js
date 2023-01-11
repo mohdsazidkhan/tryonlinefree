@@ -1,4 +1,7 @@
-import { Box, Container, Flex, Grid, GridItem } from '@chakra-ui/react';
+import { Box, Container, Flex, Grid, GridItem,Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription, } from '@chakra-ui/react';
 import { Link, NavLink } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 import './dashboard.css';
@@ -11,6 +14,11 @@ const Dashboard = () => {
   const [articles, setArticles] = useState([]);
   const [tags, setTags] = useState([]);
   const [users, setUsers] = useState([]);
+  const [showAlert, setShowAlert] = useState(false);
+  const [errorType, seErrorType] = useState(false);
+  const [message, setMessage] = useState('');
+  const [tooltopTitle, setToolTipTitle] = useState('');
+  const [userArticles, setUserArticles] = useState([]);
   const [userType, setUserType] = useState('');
 
   const getUsers = () => {
@@ -84,9 +92,51 @@ const Dashboard = () => {
     let user = JSON.parse(localStorage.getItem('user'));
     const userT = user.userType;
     setUserType(userT);
+    const userId = user?._id;
+
+    axios
+      .get(`${variables.BASE_URL}/user-articles/${userId}`)
+      .then(response => {
+        if (response.data.success) {
+          setToolTipTitle('Success');
+          setMessage(response.data.message);
+          seErrorType(response.data.success);
+          setUserArticles(response.data.data);
+        }
+      })
+      .catch(error => {
+        if (error.response.data.success === false) {
+          seErrorType(error.response.data.success);
+          setToolTipTitle(error.response.data.error.name);
+          setMessage(error.response.data.error.message);
+          setShowAlert(true);
+          setTimeout(() => {
+            setShowAlert(false);
+          }, 3000);
+        }
+      });
   }, []);
   return (
     <>
+    {showAlert && (
+        <>
+          <Alert
+            status={errorType === true ? 'success' : 'error'}
+            style={{
+              position: 'fixed',
+              top: 0,
+              right: 0,
+              zIndex: 9,
+              width: 'auto',
+              boxShadow: '-1px 1px 5px 0px rgb(0 0 0 / 25%)',
+            }}
+          >
+            <AlertIcon />
+            <AlertTitle>{tooltopTitle}</AlertTitle>
+            <AlertDescription>{message}</AlertDescription>
+          </Alert>
+        </>
+      )}
       <Navbar />
       <Container
         maxW="lg"
@@ -177,7 +227,7 @@ const Dashboard = () => {
                   h="100"
                   bg="orange.600"
                 >
-                  <h4>{articles?.length}</h4>
+                  <h4>{userArticles?.length}</h4>
                   <p>Articles</p>
                 </GridItem>
                 

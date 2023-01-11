@@ -25,11 +25,14 @@ import moment from 'moment';
 import Sidebar from './sidebar';
 
 const AllArticles = () => {
+
   const [showAlert, setShowAlert] = useState(false);
   const [errorType, seErrorType] = useState(false);
   const [message, setMessage] = useState('');
   const [tooltopTitle, setToolTipTitle] = useState('');
   const [articles, setArticles] = useState([]);
+  const [userArticles, setUserArticles] = useState([]);
+  const [userType, setUserType] = useState('');
 
   const getArticles = () => {
     axios
@@ -57,6 +60,31 @@ const AllArticles = () => {
 
   useEffect(() => {
     getArticles();
+    let user = JSON.parse(localStorage.getItem('user'));
+    const userId = user?._id;
+    const userType = user?.userType;
+    setUserType(userType)
+    axios
+      .get(`${variables.BASE_URL}/user-articles/${userId}`)
+      .then(response => {
+        if (response.data.success) {
+          setToolTipTitle('Success');
+          setMessage(response.data.message);
+          seErrorType(response.data.success);
+          setUserArticles(response.data.data);
+        }
+      })
+      .catch(error => {
+        if (error.response.data.success === false) {
+          seErrorType(error.response.data.success);
+          setToolTipTitle(error.response.data.error.name);
+          setMessage(error.response.data.error.message);
+          setShowAlert(true);
+          setTimeout(() => {
+            setShowAlert(false);
+          }, 3000);
+        }
+      });
   }, []);
   return (
     <>
@@ -90,7 +118,7 @@ const AllArticles = () => {
           <Box flex="1" className='content'>
           <div className='flex justify-between items-center pb-5 px-5'>
             <div className='text-green-500'>Articles</div>
-            <div className='text-yellow-500'>{articles?.length}</div>
+            <div className='text-yellow-500'>{userType === 'admin' ? articles?.length : userArticles?.length}</div>
             <div className="addBtn">
               <Link to="/add-article">
                 <Button size="sm" rounded="md" colorScheme="gray">
@@ -103,7 +131,7 @@ const AllArticles = () => {
             
             <TableContainer>
               <Table>
-                <Thead>
+                <Thead> 
                   <Tr>
                     <Th>Image</Th>
                     <Th>Title</Th>
@@ -113,6 +141,8 @@ const AllArticles = () => {
                   </Tr>
                 </Thead>
                 <Tbody>
+                {userType === 'admin' ?
+                  <>
                   {articles?.map(item=>
                   <Tr key={item?._id}>
                     <Td><img width='80' src={item?.image} alt={item?.title}/></Td>
@@ -127,6 +157,25 @@ const AllArticles = () => {
                     </Td>
                   </Tr>
                   )}
+                  </>
+                  :
+                  <>
+                  {userArticles?.map(item=>
+                    <Tr key={item?._id}>
+                      <Td><img width='80' src={item?.image} alt={item?.title}/></Td>
+                      <Td>{item?.title}</Td>
+                      <Td>{item?.categoryName}</Td>
+                      <Td>{moment(item?.createdAt).format("DD MMM YYYY h:mm A")}</Td>
+                      <Td>
+                        <Flex justifyContent={'space-between'}>
+                          <EditIcon cursor={'pointer'} color={'green.500'} />
+                          <DeleteIcon cursor={'pointer'} color={'red.500'} />
+                        </Flex>
+                      </Td>
+                    </Tr>
+                    )}
+                  </>
+                  }
                 </Tbody>
               </Table>
             </TableContainer>
