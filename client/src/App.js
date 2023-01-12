@@ -24,6 +24,7 @@ import Categories from './pages/categories/categories';
 import Articles from './pages/posts/articles';
 import Tags from './pages/tags/tags';
 import TagPosts from './pages/tags/tagPosts';
+
 const breakpoints = {
   sm: '320px',
   md: '768px',
@@ -31,7 +32,11 @@ const breakpoints = {
   xl: '1200px',
   '2xl': '1536px',
 }
-const theme = extendTheme({ breakpoints })
+const config = {
+  initialColorMode: "dark",
+  useSystemColorMode: false,
+}
+const theme = extendTheme({ config, breakpoints })
 function App() {
   return (
     <ChakraProvider theme={theme}>

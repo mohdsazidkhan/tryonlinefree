@@ -23,13 +23,34 @@ import { variables } from '../../config/config';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Sidebar from './sidebar';
+import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
+  const navigate = useNavigate();
   const [showAlert, setShowAlert] = useState(false);
   const [errorType, seErrorType] = useState(false);
   const [message, setMessage] = useState('');
   const [tooltopTitle, setToolTipTitle] = useState('');
   const [userDetail, setUserDetail] = useState({});
+  const [image, setImage] = useState();
+  const [imageBase64, setBase64IMG] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleImageChange = (e) => {
+    convertToBase64(e.target.files[0])
+    setImage(e.target.files[0]);
+  };
+
+  const convertToBase64 = (selectedFile) => {
+    const reader = new FileReader()
+    reader.readAsDataURL(selectedFile)
+    reader.onload = () => {
+      setBase64IMG(reader.result)
+    }
+  }
 
   useEffect(() => {
     let user = JSON.parse(localStorage.getItem('user'));
@@ -56,6 +77,63 @@ const Profile = () => {
         }
       });
   }, []);
+
+  const handleChange = e => {
+    if(e.target.name === 'name'){
+      setName(e.target.value);
+    }
+    if(e.target.name === 'email'){
+      setEmail(e.target.value);
+    }
+    if(e.target.name === 'phone'){
+      setPhone(e.target.value);
+    }
+    if(e.target.name === 'password'){
+      setPassword(e.target.value);
+    }
+  };
+
+  const updateProfile = () => {
+    var user = JSON.parse(localStorage.getItem('user'));
+    let userId = user?._id;
+    const formData = new FormData();
+    formData.append("userId", userId);
+    formData.append("image", image ? image : userDetail?.image);
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("phone", phone);
+    formData.append("password", password);
+    axios({
+      method: 'post',
+      url: `${variables.BASE_URL}/updateProfile`,
+      data: formData,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+      },
+    }).then(response => {
+        if (response.data.success) {
+          setToolTipTitle("Success");
+          setMessage(response.data.message);
+          seErrorType(response.data.success)
+          setShowAlert(true);
+          setTimeout(() => {
+            setShowAlert(false);
+            navigate('/dashboard');
+          }, 3000);
+        }
+      })
+      .catch(error => {
+        if(error.response.data.success===false){
+          seErrorType(error.response.data.success)
+          setToolTipTitle(error.response.data.error.name);
+          setMessage(error.response.data.error.message);
+          setShowAlert(true);
+          setTimeout(() => {
+            setShowAlert(false);
+          }, 3000);
+        }
+      });
+  };
   return (
     <>
       {showAlert && (
@@ -91,11 +169,15 @@ const Profile = () => {
               <FormLabel>User Photo</FormLabel>
               <Stack direction={['column', 'row']} spacing={6}>
                 <Center>
-                  <Avatar size="xl" src="https://bit.ly/sage-adebayo">
+                  <Avatar size="xl" src={userDetail?.image ? userDetail?.image : imageBase64}>
                   </Avatar>
                 </Center>
                 <Center w="full">
-                  <Button w="full">Change Photo</Button>
+                  <input
+                    name="image"
+                    type="file"
+                    onChange={handleImageChange}
+                  />
                 </Center>
               </Stack>
             </FormControl>
@@ -106,6 +188,8 @@ const Profile = () => {
                 _placeholder={{ color: 'gray.500' }}
                 type="text"
                 defaultValue={userDetail?.name}
+                name="name"
+                onChange={handleChange}
               />
             </FormControl>
             <FormControl className='my-2' id="email" isRequired>
@@ -115,6 +199,8 @@ const Profile = () => {
                 _placeholder={{ color: 'gray.500' }}
                 type="email"
                 defaultValue={userDetail?.email}
+                name="email"
+                onChange={handleChange}
               />
             </FormControl>
             <FormControl  className='my-2' id="phone" isRequired>
@@ -124,6 +210,8 @@ const Profile = () => {
                 _placeholder={{ color: 'gray.500' }}
                 type="text"
                 defaultValue={userDetail?.phone}
+                name="phone"
+                onChange={handleChange}
               />
             </FormControl>
             <FormControl  className='my-2' id="password" isRequired>
@@ -132,6 +220,8 @@ const Profile = () => {
                 placeholder="password"
                 _placeholder={{ color: 'gray.500' }}
                 type="password"
+                name="password"
+                onChange={handleChange}
               />
             </FormControl>
             <Stack className='my-4' direction='row'>
@@ -152,6 +242,7 @@ const Profile = () => {
                 _hover={{
                   bg: 'blue.500',
                 }}
+                onClick={updateProfile}
               >
                 Submit
               </Button>

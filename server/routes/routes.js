@@ -122,6 +122,40 @@ router.post('/add-article', uploader.single("image"), async(req, res) => {
     }
 })
 
+router.post('/updateProfile', uploader.single("image"), async(req, res) => {
+    if(req.body){
+        console.log(req.body, ' req.body')
+        let {userId, name, email, phone, password, image} = req.body;
+        if(req.file){
+            const upload = await cloudinary.v2.uploader.upload(req.file.path);
+            image = upload.secure_url;
+        }
+        if(password){
+            password = await bcrypt.hash(password, salt);
+        }
+        User.findByIdAndUpdate(userId, 
+        {
+            $set : {
+                image: image,
+                name: name,
+                email: email,
+                password: phone,
+                password: password
+            }
+        }).then(user=>{
+            res.status(201).json({
+                success: true,
+                message: 'User Update successfully!',
+                data: user
+            });
+        }).catch(error=>{
+            res.status(401).json({
+                error
+            });
+        })
+    }
+})
+
 router.get('/all-categories', function(req, res) {
     Categories.find({}, function(err, categories){
       if (err)
