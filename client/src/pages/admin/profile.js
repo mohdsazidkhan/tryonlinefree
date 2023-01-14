@@ -37,7 +37,11 @@ const Profile = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [password, setPassword] = useState('');
+  const [github, setGithub] = useState('');
+  const [linkedin, setLinkedin] = useState('');
+  const [facebook, setFacebook] = useState('');
+  const [instagram, setInstagram] = useState('');
+  const [twitter, setTwitter] = useState('');
 
   const handleImageChange = (e) => {
     convertToBase64(e.target.files[0])
@@ -88,8 +92,20 @@ const Profile = () => {
     if(e.target.name === 'phone'){
       setPhone(e.target.value);
     }
-    if(e.target.name === 'password'){
-      setPassword(e.target.value);
+    if(e.target.name === 'github'){
+      setGithub(e.target.value);
+    }
+    if(e.target.name === 'linkedin'){
+      setLinkedin(e.target.value);
+    }
+    if(e.target.name === 'facebook'){
+      setFacebook(e.target.value);
+    }
+    if(e.target.name === 'instagram'){
+      setInstagram(e.target.value);
+    }
+    if(e.target.name === 'twitter'){
+      setTwitter(e.target.value);
     }
   };
 
@@ -97,12 +113,17 @@ const Profile = () => {
     var user = JSON.parse(localStorage.getItem('user'));
     let userId = user?._id;
     const formData = new FormData();
+
     formData.append("userId", userId);
     formData.append("image", image ? image : userDetail?.image);
-    formData.append("name", name);
-    formData.append("email", email);
-    formData.append("phone", phone);
-    formData.append("password", password);
+    formData.append("name", name ? name : userDetail?.name);
+    formData.append("email", email ? email : userDetail?.email);
+    formData.append("phone", phone ? phone : userDetail?.phone);
+    formData.append("github", github ? github : userDetail?.github);
+    formData.append("linkedin", linkedin ? linkedin : userDetail?.linkedin);
+    formData.append("facebook", facebook ? facebook : userDetail?.facebook);
+    formData.append("instagram", instagram ? instagram : userDetail?.instagram);
+    formData.append("twitter", twitter ? twitter : userDetail?.twitter);
     axios({
       method: 'post',
       url: `${variables.BASE_URL}/updateProfile`,
@@ -118,7 +139,7 @@ const Profile = () => {
           setShowAlert(true);
           setTimeout(() => {
             setShowAlert(false);
-            navigate('/dashboard');
+            window.location.reload()
           }, 3000);
         }
       })
@@ -169,7 +190,7 @@ const Profile = () => {
               <FormLabel>User Photo</FormLabel>
               <Stack direction={['column', 'row']} spacing={6}>
                 <Center>
-                  <Avatar size="xl" src={userDetail?.image ? userDetail?.image : imageBase64}>
+                  <Avatar size="xl" src={imageBase64  ? imageBase64 : userDetail?.image}>
                   </Avatar>
                 </Center>
                 <Center w="full">
@@ -214,13 +235,58 @@ const Profile = () => {
                 onChange={handleChange}
               />
             </FormControl>
-            <FormControl  className='my-2' id="password" isRequired>
-              <FormLabel>Password</FormLabel>
+            <FormControl  className='my-2' id="github" isRequired>
+              <FormLabel>Github Link</FormLabel>
               <Input
-                placeholder="password"
+                placeholder="Enter Github Link"
                 _placeholder={{ color: 'gray.500' }}
-                type="password"
-                name="password"
+                type="text"
+                defaultValue={userDetail?.github}
+                name="github"
+                onChange={handleChange}
+              />
+            </FormControl>
+            <FormControl  className='my-2' id="linkedin" isRequired>
+              <FormLabel>Linkedin Link</FormLabel>
+              <Input
+                placeholder="Enter Linkedin Link"
+                _placeholder={{ color: 'gray.500' }}
+                type="text"
+                defaultValue={userDetail?.linkedin}
+                name="linkedin"
+                onChange={handleChange}
+              />
+            </FormControl>
+            <FormControl  className='my-2' id="instagram" isRequired>
+              <FormLabel>Instagram Link</FormLabel>
+              <Input
+                placeholder="Enter Instagram Link"
+                _placeholder={{ color: 'gray.500' }}
+                type="text"
+                defaultValue={userDetail?.instagram}
+                name="instagram"
+                onChange={handleChange}
+              />
+            </FormControl>
+            <FormControl  className='my-2' id="facebook" isRequired>
+              <FormLabel>Facebook Link</FormLabel>
+              <Input
+                placeholder="Enter Facebook Link"
+                _placeholder={{ color: 'gray.500' }}
+                type="text"
+                defaultValue={userDetail?.facebook}
+                name="facebook"
+                onChange={handleChange}
+              />
+            </FormControl>
+            <FormControl  className='my-2' id="twitter" isRequired>
+              <FormLabel>Twitter Link</FormLabel>
+              <Input
+                placeholder="Enter Twitter Link"
+                _placeholder={{ color: 'gray.500' }}
+                type="text"
+                defaultValue={userDetail?.twitter}
+                name="twitter"
                 onChange={handleChange}
               />
             </FormControl>

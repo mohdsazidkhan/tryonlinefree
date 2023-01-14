@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Button, Stack, Container } from '@chakra-ui/react';
 import {Link} from 'react-router-dom'
-import { ReactComponent as Logo } from '../logo.svg';
 import { ColorModeSwitcher } from '../ColorModeSwitcher';
 import '../components/Navbar.css'
 
@@ -21,8 +20,8 @@ const NavBar = props => {
 
   return (
     <NavBarContainer mx-auto="true" {...props}>
-      <Link to="/">
-        <Logo style={{ width:'80px', height: '50px' }} />
+      <Link to="https://tryonlinefree.com">
+        <img src={require('../logo.png')} style={{ borderRadius: '5px', height: '50px' }} />
       </Link>
       <MenuToggle toggle={toggle} isOpen={isOpen} />
       <MenuLinks isOpen={isOpen} loggedIn={loggedIn}/>

@@ -124,35 +124,46 @@ router.post('/add-article', uploader.single("image"), async(req, res) => {
 
 router.post('/updateProfile', uploader.single("image"), async(req, res) => {
     if(req.body){
-        console.log(req.body, ' req.body')
-        let {userId, name, email, phone, password, image} = req.body;
+
+        let {userId, name, email, phone, image, github, linkedin, facebook, instagram, twitter} = req.body;
+
         if(req.file){
             const upload = await cloudinary.v2.uploader.upload(req.file.path);
             image = upload.secure_url;
         }
-        if(password){
-            password = await bcrypt.hash(password, salt);
-        }
-        User.findByIdAndUpdate(userId, 
-        {
-            $set : {
-                image: image,
-                name: name,
-                email: email,
-                password: phone,
-                password: password
-            }
-        }).then(user=>{
-            res.status(201).json({
-                success: true,
-                message: 'User Update successfully!',
-                data: user
-            });
-        }).catch(error=>{
+
+        if(image || name || email || phone || github || linkedin || facebook || instagram || twitter){
+            User.findByIdAndUpdate(userId, 
+            {
+                $set : {
+                    image: image,
+                    name: name,
+                    email: email,
+                    phone: phone,
+                    github: github,
+                    linkedin: linkedin,
+                    facebook: facebook,
+                    instagram: instagram,
+                    twitter: twitter
+                }
+            }).then(user=>{
+                res.status(201).json({
+                    success: true,
+                    message: 'User Update successfully!',
+                    data: user
+                });
+            }).catch(error=>{
+                res.status(401).json({
+                    error
+                });
+            })
+        }else{
             res.status(401).json({
-                error
+                success: false,
+                message: 'User Not Updated',
+                data: []
             });
-        })
+        }
     }
 })
 
