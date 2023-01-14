@@ -20,9 +20,9 @@ const NavBar = props => {
 
   return (
     <NavBarContainer mx-auto="true" {...props}>
-      <Link to="https://tryonlinefree.com">
+      <a href="https://tryonlinefree.com">
         <img src={require('../logo.png')} style={{ borderRadius: '5px', height: '50px' }} />
-      </Link>
+      </a>
       <MenuToggle toggle={toggle} isOpen={isOpen} />
       <MenuLinks isOpen={isOpen} loggedIn={loggedIn}/>
       <ColorModeSwitcher justifySelf="flex-end" />
