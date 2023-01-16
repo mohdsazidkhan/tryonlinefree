@@ -108,11 +108,20 @@
     margin: auto;
 }
 .sideBar{
-    width: 200px;
+    width: 180px;
 }
 .userProfile{
     max-width: 400px;
     margin: auto;
+}
+.selectFile{
+    z-index: 99;
+    width: 96px;
+    height: 96px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
 }
 @media screen and (max-width:786px){
     .articleDetailBg {

@@ -186,15 +186,14 @@ const Profile = () => {
               <FormLabel>User Photo</FormLabel>
               <Stack direction={['column', 'row']} spacing={6}>
                 <Center>
-                  <Avatar size="xl" src={imageBase64  ? imageBase64 : userDetail?.image}>
-                  </Avatar>
-                </Center>
-                <Center w="full">
+                  <Avatar className='profileUpload relative' size="xl" src={imageBase64  ? imageBase64 : userDetail?.image}>
                   <input
+                    className='selectFile'
                     name="image"
                     type="file"
                     onChange={handleImageChange}
                   />
+                  </Avatar>
                 </Center>
               </Stack>
             </FormControl>

@@ -140,11 +140,11 @@ router.post('/updateProfile', uploader.single("image"), async(req, res) => {
                     name: name,
                     email: email,
                     phone: phone,
-                    github: github,
-                    linkedin: linkedin,
-                    facebook: facebook,
-                    instagram: instagram,
-                    twitter: twitter
+                    github: github ? github : '',
+                    linkedin: linkedin ? linkedin : '',
+                    facebook: facebook ? facebook : '',
+                    instagram: instagram ? instagram : '',
+                    twitter: twitter ? twitter : ''
                 }
             }).then(user=>{
                 res.status(201).json({
