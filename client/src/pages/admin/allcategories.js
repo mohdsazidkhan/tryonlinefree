@@ -77,11 +77,7 @@ const AllCategories = () => {
         </>
       )}
       <Navbar />
-      <Container
-        maxW="lg"
-        maxWidth={{ lg: '1400px', md: '1000px', sm: '600px' }}
-        marginTop={'20px'}
-      >
+      <div className='container mt-5 mx-auto'>
         <Flex color="white" className='mainContent pb-5'>
         <Sidebar/>
           <Box flex="1" className='content'>
@@ -115,7 +111,7 @@ const AllCategories = () => {
             </TableContainer>
           </Box>
         </Flex>
-      </Container>
+      </div>
     </>
   );
 };

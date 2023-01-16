@@ -138,11 +138,7 @@ const Dashboard = () => {
         </>
       )}
       <Navbar />
-      <Container
-        maxW="lg"
-        maxWidth={{ lg: '1400px', md: '1000px', sm: '600px' }}
-        marginTop={'20px'}
-      >
+      <div className='container mt-5 mx-auto'>
         <Flex color="white" className="mainContent pb-5">
           <Sidebar />
           {userType === 'admin' ? (
@@ -245,7 +241,7 @@ const Dashboard = () => {
             </Box>
           )}
         </Flex>
-      </Container>
+      </div>
     </>
   );
 };
