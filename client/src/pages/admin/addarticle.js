@@ -198,16 +198,15 @@ const AddArticle = () => {
               <form>
                 <Stack spacing={4} p="1rem" boxShadow="md">
                   <FormControl>
-                    <div className="uploadedImg">
-                      <img src={imageBase64} alt="" />
-                    </div>
-                    <InputGroup>
+                    <div className="uploadedImg relative">
+                      <img src={imageBase64 ? imageBase64 : require('../../resources/images/article.png')} alt="" />
                       <input
+                        className='uploadArticle'
                         name="image"
                         type="file"
                         onChange={handleImageChange}
                       />
-                    </InputGroup>
+                    </div>
                   </FormControl>
                   <FormControl>
                     <InputGroup>
@@ -248,7 +247,7 @@ const AddArticle = () => {
                       <Input
                         name="tag"
                         type="text"
-                        placeholder="Enter Tag Name"
+                        placeholder="Enter tag & press enter"
                         onKeyDown={handleKeyDown}
                       />
                     </div>
