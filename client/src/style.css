@@ -169,4 +169,7 @@
         right: 24px;
         z-index: 99;
     }
+    .container{
+        padding: 10px;
+    }
 }
