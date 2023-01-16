@@ -123,6 +123,14 @@
     top: 0;
     opacity: 0;
 }
+.chakra-ui-light .userProfile label,
+.chakra-ui-light .userProfile input{
+    color: #000;
+}
+.chakra-ui-dark .userProfile label,
+.chakra-ui-dark .userProfile input{
+    color: #fff;
+}
 @media screen and (max-width:786px){
     .articleDetailBg {
         height: 10rem;
