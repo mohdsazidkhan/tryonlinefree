@@ -288,7 +288,7 @@ const Profile = () => {
             return (
               <div className="articleItem shadow border rounded-md" key={index}>
                 <Link
-                  to={`/${item?.categoryName.toLowerCase()}/${item?.slug}`}
+                  to={`/${item?.categoryName.toLowerCase()}/${item?.slug}/${item?._id}`}
                   state={{ id: item._id }}
                   className="rounded-md articleBg cursor-pointer h-40 flex"
                   style={{ backgroundImage: 'url(' + imgUrl + ')' }}

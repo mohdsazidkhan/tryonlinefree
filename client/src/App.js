@@ -24,6 +24,7 @@ import Categories from './pages/categories/categories';
 import Articles from './pages/posts/articles';
 import Tags from './pages/tags/tags';
 import TagPosts from './pages/tags/tagPosts';
+import NoPage from './pages/nopage';
 
 const breakpoints = {
   sm: '320px',
@@ -53,7 +54,7 @@ function App() {
           <Route path="/all-users" element={<AllUsers />} />
           <Route path="/users" element={<Users />} />
           <Route path="/add-article" element={<AddArticle />} />
-          <Route path="/:category/:slug" element={<ArticleDetail />} />
+          <Route path="/:category/:slug/:postID" element={<ArticleDetail />} />
           <Route path="/category/:categoryName" element={<CategoryArticles />} />
           <Route path="/categories" element={<Categories />} />
           <Route path="/articles" element={<Articles />} />
@@ -61,7 +62,7 @@ function App() {
           <Route path="/tag/:tag" element={<TagPosts />} />
           <Route path="/user/profile/:userId" element={<UserProfile />} />
           <Route path="/profile" element={<Profile />} />
-          {/* <Route path="*" element={ <NoPage /> } /> */}
+          <Route path="*" element={ <NoPage /> } />
         </Routes>
     </BrowserRouter>
     </ChakraProvider>

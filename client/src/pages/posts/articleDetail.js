@@ -7,7 +7,7 @@ import {
   AlertDescription,
 } from '@chakra-ui/react';
 import axios from 'axios';
-import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { useNavigate, Link, useParams } from 'react-router-dom';
 import { variables } from '../../config/config';
 import moment from 'moment';
 import {
@@ -21,10 +21,10 @@ import {
   TwitterShareButton,
   WhatsappShareButton,
 } from 'react-share';
+
 const ArticleDetail = () => {
-  const location = useLocation();
-  let articleId = location?.state?.id;
-  const navigate = useNavigate();
+  let params = useParams()
+  let articleId = params?.postID;
   const [showAlert, setShowAlert] = useState(false);
   const [errorType, seErrorType] = useState(false);
   const [message, setMessage] = useState('');
