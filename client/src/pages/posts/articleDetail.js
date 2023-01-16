@@ -85,7 +85,7 @@ const ArticleDetail = () => {
         </>
       )}
       <Navbar />
-      <div className="container mx-auto p-5 m-5">
+      <div className="container mx-auto py-5 m-5">
         <div className="articleDetailItem shadow border rounded-md">
           <div className="rounded-md px-5 py-2">
             <div className="flex flex-col">

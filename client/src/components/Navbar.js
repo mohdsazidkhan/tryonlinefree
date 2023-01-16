@@ -19,14 +19,14 @@ const NavBar = props => {
 
 
   return (
-    <NavBarContainer mx-auto="true" {...props}>
+    <div className='navbar container flex justify-between items-center py-5 mx-auto' {...props}>
       <a href="https://tryonlinefree.com">
         <img src={require('../logo.png')} style={{ borderRadius: '5px', height: '50px' }} />
       </a>
       <MenuToggle toggle={toggle} isOpen={isOpen} />
       <MenuLinks isOpen={isOpen} loggedIn={loggedIn}/>
       <ColorModeSwitcher justifySelf="flex-end" />
-    </NavBarContainer>
+    </div>
   );
 };
 

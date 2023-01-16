@@ -96,7 +96,7 @@ const Profile = () => {
         </>
       )}
       <Navbar />
-      <div className="container mx-auto p-5 m-5">
+      <div className="container mx-auto py-5 m-5">
         <div className="rounded-xl border p-5 text-center category">
           <Avatar size="xl" src={userDetail?.image}>
           </Avatar>

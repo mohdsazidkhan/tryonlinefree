@@ -63,6 +63,30 @@
     font-size: 18px;
     cursor: pointer;
 }
+.textEditor{
+    position: relative;
+}
+.fullscreenEditor{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #1A202C;
+}
+.fullscreenEditor .quill{
+    height: 100vh;
+}
+.fullscreen,.miniscreen{
+    position: absolute;
+    right: 12px;
+    top: 14px;
+    z-index: 999;
+    cursor: pointer;
+}
+.fullscreen img,.miniscreen img{
+    width: 16px;
+}
 .uploadedImg{
     margin: 10px 0;
 }
@@ -84,7 +108,7 @@
     margin: auto;
 }
 .sideBar{
-    width: 220px;
+    width: 200px;
 }
 .userProfile{
     max-width: 400px;

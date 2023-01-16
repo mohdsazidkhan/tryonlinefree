@@ -93,7 +93,7 @@ const Home = () => {
         </>
       )}
       <Navbar />
-      <div className="container mx-auto p-5 m-5">
+      <div className="container mx-auto py-5 m-5">
         <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {categories?.map((item, index) => (
             <Link 
