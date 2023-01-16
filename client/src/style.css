@@ -99,6 +99,28 @@
 .uploadedImg{
     margin: 10px 0;
 }
+.articleDetailItem pre, 
+.articleDetailItem code, 
+.articleDetailItem kbd, 
+.articleDetailItem samp {
+    white-space: normal;
+}
+.chakra-ui-dark pre, 
+.chakra-ui-dark code, 
+.chakra-ui-dark kbd, 
+.chakra-ui-dark samp{
+    color: #f90;
+}
+.chakra-ui-light pre, 
+.chakra-ui-dark code, 
+.chakra-ui-dark kbd, 
+.chakra-ui-dark samp{
+    color: #2196f3;
+}
+.articleDetailItem a{
+    color: #2196f3;
+}
+.ar
 .uploadedImg img{
     max-height: 200px;
     border-radius:4px;
