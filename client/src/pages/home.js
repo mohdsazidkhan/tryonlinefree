@@ -128,7 +128,7 @@ const Home = () => {
                     {item?.categoryName}
                   </Link>
                   <Link
-                    to={`/${item?.categoryName.toLowerCase()}/${item?.slug}`}
+                    to={`/${item?.categoryName.toLowerCase()}/${item?.slug}/${item?._id}`}
                     state = {{ id: item._id }}
                     className="cursor-pointer text-xl font-bold"
                   >
