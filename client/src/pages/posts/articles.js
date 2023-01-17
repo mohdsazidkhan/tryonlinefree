@@ -100,7 +100,7 @@ const Articles = () => {
                     {item?.tags.map((sitem, index) => {
                       return (
                         <Link
-                        to={`/hashtag/${sitem}`}
+                        to={`/tag/${sitem}`}
                         state = {{ id: item._id }}
                         className="text-cyan-400 cursor-pointer"
                         key={index}

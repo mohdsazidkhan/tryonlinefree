@@ -164,7 +164,8 @@ const AddArticle = () => {
   function removeTag(index) {
     setTags(tags.filter((el, i) => i !== index));
   }
-
+  let imgUrl = ''
+  imgUrl = imageBase64 ? imageBase64 : require('../../resources/images/article.png')
   return (
     <>
       {showAlert && (
@@ -198,8 +199,7 @@ const AddArticle = () => {
               <form>
                 <Stack spacing={4} p="1rem" boxShadow="md">
                   <FormControl>
-                    <div className="uploadedImg relative">
-                      <img src={imageBase64 ? imageBase64 : require('../../resources/images/article.png')} alt="" />
+                    <div className="uploadedImg relative" style={{backgroundImage:'url('+imgUrl+')'}}>
                       <input
                         className='uploadArticle'
                         name="image"
