@@ -7,11 +7,10 @@ import {
   AlertDescription,
 } from '@chakra-ui/react';
 import axios from 'axios';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { variables } from '../config/config';
 
 const Home = () => {
-  const navigate = useNavigate();
   const [showAlert, setShowAlert] = useState(false);
   const [errorType, seErrorType] = useState(false);
   const [message, setMessage] = useState('');
@@ -108,8 +107,11 @@ const Home = () => {
         </div>
         <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-10">
           {articles?.map((item, index) => {
+            let imgArt = item?.image;
+            let newImg = imgArt.split('.')
+            let newImageURl = newImg[0]+'.'+newImg[1]+'.'+newImg[2]+'.'+"webp"
             var imgUrl = item?.image
-              ? item?.image
+              ? newImageURl
               : 'resources/images/article.png';
             return (
               <div className="articleItem shadow border rounded-md" key={index}>
