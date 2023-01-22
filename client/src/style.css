@@ -222,6 +222,8 @@
 }
 .articleTags a{
     padding-right: 10px;
+    margin: 5px 0;
+    display: inline-block;
 }
 @media screen and (max-width:768px){
     .articleDetailBg {
