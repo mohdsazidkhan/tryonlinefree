@@ -114,6 +114,7 @@ const Home = () => {
             return (
               <div className="articleItem shadow border rounded-md" key={index}>
                 <Link
+                  title={item?.title}
                   to={`/${item?.categoryName.toLowerCase()}/${item?.slug}/${item?._id}`}
                   state = {{ id: item._id }}
                   className="rounded-md articleBg cursor-pointer h-40 flex"
@@ -130,11 +131,11 @@ const Home = () => {
                   <Link
                     to={`/${item?.categoryName.toLowerCase()}/${item?.slug}/${item?._id}`}
                     state = {{ id: item._id }}
-                    className="cursor-pointer text-xl font-bold"
+                    className="cursor-pointer text-xl font-bold mt-3"
                   >
                     {item?.title}
                   </Link>
-                  <div>
+                  <div className='articleTags'>
                     {item?.tags.map((sitem, index) => {
                       return (
                         <Link

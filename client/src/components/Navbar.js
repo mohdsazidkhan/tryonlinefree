@@ -21,7 +21,7 @@ const NavBar = props => {
   return (
     <div className='navbar container flex justify-between items-center py-5 mx-auto' {...props}>
       <a href="https://tryonlinefree.com">
-        <img src={require('../logo.png')} style={{ borderRadius: '5px', height: '50px' }} />
+        <img className='rounded-md' src={require('../logo.png')} width="50" height="50" title="tryonlinefree logo" alt="tryonlinefree logo"/>
       </a>
       <MenuToggle toggle={toggle} isOpen={isOpen} />
       <MenuLinks isOpen={isOpen} loggedIn={loggedIn}/>

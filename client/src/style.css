@@ -217,6 +217,12 @@
 .chakra-ui-dark .fullscreenEditor{
     background-color: #1A202C;
 }
+.articleTags{
+    margin-top: 10px;
+}
+.articleTags a{
+    padding-right: 10px;
+}
 @media screen and (max-width:768px){
     .articleDetailBg {
         height: 10rem;
