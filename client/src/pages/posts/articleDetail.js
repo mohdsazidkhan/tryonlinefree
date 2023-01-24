@@ -92,12 +92,12 @@ const ArticleDetail = () => {
               <Link
                 to={`/category/${article?.categoryName?.toLowerCase()}`}
                 state={{ id: article?.categoryId }}
-                className="text-green-600 mt-2"
+                className="text-green-600 mt-2 text-lg"
               >
                 {article?.categoryName}
               </Link>
-              <h2 className="text-xl font-semibold">{article?.title}</h2>
-              <div className="text-indigo-600 mt-2">
+              <h1>{article?.title}</h1>
+              <div className="text-white-600 mt-2 text-lg">
                 Published at:{' '}
                 {moment(article?.createdAt).format('DD MMM YYYY h:mm A')} by{' '}
                 <Link
@@ -115,7 +115,7 @@ const ArticleDetail = () => {
                       key={index}
                       to={`/tag/${sitem.toLowerCase()}`}
                       state={{ tag: sitem }}
-                      className="p-1 text-teal-600"
+                      className="mr-3 mt-2 mb-2 inline-block text-lg text-teal-600"
                     >
                       #{sitem}
                     </Link>
