@@ -101,8 +101,6 @@ const Profile = () => {
           <Avatar size="xl" src={userDetail?.image}>
           </Avatar>
           <div className="text-green-600 mt-2">{userDetail?.name}</div>
-          <div className="text-indigo-600">{userDetail?.email}</div>
-          <div className="text-red-600">{userDetail?.phone}</div>
           <div className="flex justify-center items-center mt-2">
             <a href={userDetail?.facebook} target="_blank">
               <svg

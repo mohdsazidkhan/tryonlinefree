@@ -18,6 +18,10 @@ menu {
 .articleDetailItem h6 {
   font-size: revert !important;
 }
+.articleDetailItem p {
+  font-size: 17px !important;
+  letter-spacing: .5px;
+}
 .chakra-ui-light td {
   color: black;
 }
