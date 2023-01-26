@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import {
   Box,
-  Container,
   Flex,
   Heading,
   Input,
@@ -15,7 +14,6 @@ import {
   AlertDescription,
   Select,
 } from '@chakra-ui/react';
-import { NavLink } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -137,7 +135,7 @@ const AddArticle = () => {
           setTimeout(() => {
             setShowAlert(false);
             navigate('/all-articles');
-          }, 3000);
+          }, 2000);
         }
       })
       .catch(error => {
@@ -148,7 +146,7 @@ const AddArticle = () => {
           setShowAlert(true);
           setTimeout(() => {
             setShowAlert(false);
-          }, 3000);
+          }, 2000);
         }
       });
   };

@@ -42,8 +42,6 @@ const Categories = () => {
       });
   };
 
-  
-
   useEffect(() => {
     getCategories();
   }, []);
@@ -70,18 +68,22 @@ const Categories = () => {
       )}
       <Navbar />
       <div className="container mx-auto py-5 m-5">
-        <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {categories?.map((item, index) => (
-            <Link 
-              to={`/category/${item?.name.toLowerCase()}`}
-              state= {{ id: item._id }}
-              key={index}
-              className="rounded-xl border p-5 text-center category cursor-pointer"
-            >
-              {item?.name}
-            </Link>
-          ))}
-        </div>
+        {categories?.length > 0 ? (
+          <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {categories?.map((item, index) => (
+              <Link
+                to={`/category/${item?.name.toLowerCase()}`}
+                state={{ id: item._id }}
+                key={index}
+                className="rounded-xl border p-5 text-center category cursor-pointer"
+              >
+                {item?.name}
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <div className="flex justify-center items-center">No Data Found</div>
+        )}
       </div>
     </>
   );

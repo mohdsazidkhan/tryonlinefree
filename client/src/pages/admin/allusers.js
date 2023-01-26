@@ -77,15 +77,15 @@ const AllUsers = () => {
         </>
       )}
       <Navbar />
-      <div className='container mt-5 mx-auto'>
-        <Flex color="white" className='mainContent pb-5'>
-        <Sidebar/>
-          <Box flex="1" className='content'>
-          <div className='flex justify-between items-center pb-5 px-5'>
-            <div className='text-green-500'>Users</div>
-            <div className='text-yellow-500'>{users?.length}</div>
-          </div>
-          <hr/>
+      <div className="container mt-5 mx-auto">
+        <Flex color="white" className="mainContent pb-5">
+          <Sidebar />
+          <Box flex="1" className="content">
+            <div className="flex justify-between items-center pb-5 px-5">
+              <div className="text-green-500">Users</div>
+              <div className="text-yellow-500">{users?.length}</div>
+            </div>
+            <hr />
             <TableContainer>
               <Table>
                 <Thead>
@@ -98,19 +98,29 @@ const AllUsers = () => {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {users?.map((item,index)=>
-                  <Tr key={index}>
-                  <Td>{item.name}</Td>
-                  <Td>{item.email}</Td>
-                  <Td>{item.userType}</Td>
-                  <Td>{item.phone}</Td>
-                  <Td>
-                    <Flex justifyContent={'space-between'}>
-                      <EditIcon cursor={'pointer'} color={'green.500'} />
-                      <DeleteIcon cursor={'pointer'} color={'red.500'} />
-                    </Flex>
-                  </Td>
-                </Tr>
+                  {users?.length > 0 ? (
+                    users?.map((item, index) => (
+                      <Tr key={index}>
+                        <Td>{item.name}</Td>
+                        <Td>{item.email}</Td>
+                        <Td>{item.userType}</Td>
+                        <Td>{item.phone}</Td>
+                        <Td>
+                          <Flex justifyContent={'space-between'}>
+                            <EditIcon cursor={'pointer'} color={'green.500'} />
+                            <DeleteIcon cursor={'pointer'} color={'red.500'} />
+                          </Flex>
+                        </Td>
+                      </Tr>
+                    ))
+                  ) : (
+                    <Tr>
+                      <Td colSpan={5}>
+                        <div className="flex justify-center items-center">
+                          No Data Found
+                        </div>
+                      </Td>
+                    </Tr>
                   )}
                 </Tbody>
               </Table>

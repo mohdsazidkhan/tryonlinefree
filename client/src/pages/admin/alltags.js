@@ -22,7 +22,6 @@ import { variables } from '../../config/config';
 import axios from 'axios';
 import Sidebar from './sidebar';
 const AllTags = () => {
-
   const [showAlert, setShowAlert] = useState(false);
   const [errorType, seErrorType] = useState(false);
   const [message, setMessage] = useState('');
@@ -90,15 +89,15 @@ const AllTags = () => {
         </>
       )}
       <Navbar />
-      <div className='container mt-5 mx-auto'>
-        <Flex color="white" className='mainContent pb-5'>
-        <Sidebar/>
-          <Box flex="1" className='content'>
-          <div className='flex justify-between items-center pb-5 px-5'>
-            <div className='text-green-500'>Tags</div>
-            <div className='text-yellow-500'>{uniqueTags?.length}</div>
-          </div>
-          <hr/>
+      <div className="container mt-5 mx-auto">
+        <Flex color="white" className="mainContent pb-5">
+          <Sidebar />
+          <Box flex="1" className="content">
+            <div className="flex justify-between items-center pb-5 px-5">
+              <div className="text-green-500">Tags</div>
+              <div className="text-yellow-500">{uniqueTags?.length}</div>
+            </div>
+            <hr />
             <TableContainer>
               <Table>
                 <Thead>
@@ -108,16 +107,26 @@ const AllTags = () => {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {uniqueTags?.map((item,index)=>
-                    <Tr key={index}>
-                    <Td>{item}</Td>
-                    <Td>
-                      <Flex justifyContent={'space-evenly'}>
-                        <EditIcon cursor={'pointer'} color={'green.500'} />
-                        <DeleteIcon cursor={'pointer'} color={'red.500'} />
-                      </Flex>
-                    </Td>
-                  </Tr>
+                  {uniqueTags?.length > 0 ? (
+                    uniqueTags?.map((item, index) => (
+                      <Tr key={index}>
+                        <Td>{item}</Td>
+                        <Td>
+                          <Flex justifyContent={'space-evenly'}>
+                            <EditIcon cursor={'pointer'} color={'green.500'} />
+                            <DeleteIcon cursor={'pointer'} color={'red.500'} />
+                          </Flex>
+                        </Td>
+                      </Tr>
+                    ))
+                  ) : (
+                    <Tr>
+                      <Td colSpan={5}>
+                        <div className="flex justify-center items-center">
+                          No Data Found
+                        </div>
+                      </Td>
+                    </Tr>
                   )}
                 </Tbody>
               </Table>

@@ -68,19 +68,23 @@ const Users = () => {
       )}
       <Navbar />
       <div className="container mx-auto py-5 m-5">
-        <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {users?.map((item, index) => (
-            <Link 
-              to={`/user/profile/${item?._id}`}
-              state= {{ id: item._id }}
-              key={index}
-              className="rounded-xl border p-5 text-center category cursor-pointer"
-            >
-              <div className='text-green-600'>{item?.name}</div>
-              <div className='text-indigo-600'>{item?.email}</div>
-            </Link>
-          ))}
-        </div>
+        {users?.length > 0 ? (
+          <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {users?.map((item, index) => (
+              <Link
+                to={`/user/profile/${item?._id}`}
+                state={{ id: item._id }}
+                key={index}
+                className="rounded-xl border p-5 text-center category cursor-pointer"
+              >
+                <div className="text-green-600">{item?.name}</div>
+                <div className="text-indigo-600">{item?.email}</div>
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <div className="flex justify-center items-center">No Data Found</div>
+        )}
       </div>
     </>
   );

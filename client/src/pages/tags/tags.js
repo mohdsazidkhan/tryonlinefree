@@ -43,18 +43,20 @@ const Tags = () => {
   };
 
   const uniqueTags = [];
-  {tags?.map(item => {
-    item.tags.map(sitem => {
-      if(uniqueTags.indexOf(sitem) === -1) {
-        uniqueTags.push(sitem)
-      }
+  {
+    tags?.map(item => {
+      item.tags.map(sitem => {
+        if (uniqueTags.indexOf(sitem) === -1) {
+          uniqueTags.push(sitem);
+        }
+      });
     });
-  })}
+  }
 
   useEffect(() => {
     getTags();
   }, []);
-  
+
   return (
     <>
       {showAlert && (
@@ -78,18 +80,22 @@ const Tags = () => {
       )}
       <Navbar />
       <div className="container mx-auto py-5 m-5">
-        <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-4" >
-          {uniqueTags?.map((item, index) => 
-            <Link 
-              key={index}
-              to={`/tag/${item.toLowerCase()}`}
-              state= {{ tag: item }}
-              className="rounded-xl border p-5 text-center category cursor-pointer"
-            >
-              #{item}
-            </Link>
-          )}
-        </div>
+        {uniqueTags?.length > 0 ? (
+          <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {uniqueTags?.map((item, index) => (
+              <Link
+                key={index}
+                to={`/tag/${item.toLowerCase()}`}
+                state={{ tag: item }}
+                className="rounded-xl border p-5 text-center category cursor-pointer"
+              >
+                #{item}
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <div className="flex justify-center items-center">No Data Found</div>
+        )}
       </div>
     </>
   );

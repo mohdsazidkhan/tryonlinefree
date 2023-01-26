@@ -7,7 +7,7 @@ import {
   AlertDescription,
 } from '@chakra-ui/react';
 import axios from 'axios';
-import { useNavigate, Link, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { variables } from '../../config/config';
 import moment from 'moment';
 import {

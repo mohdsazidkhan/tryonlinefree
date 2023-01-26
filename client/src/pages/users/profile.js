@@ -98,8 +98,7 @@ const Profile = () => {
       <Navbar />
       <div className="container mx-auto py-5 m-5">
         <div className="rounded-xl border p-5 text-center category">
-          <Avatar size="xl" src={userDetail?.image}>
-          </Avatar>
+          <Avatar size="xl" src={userDetail?.image}></Avatar>
           <div className="text-green-600 mt-2">{userDetail?.name}</div>
           <div className="flex justify-center items-center mt-2">
             <a href={userDetail?.facebook} target="_blank">
@@ -278,53 +277,64 @@ const Profile = () => {
             </a>
           </div>
         </div>
-        <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-10">
-          {articles?.map((item, index) => {
-            var imgUrl = item?.image
-              ? item?.image
-              : 'resources/images/article.png';
-            return (
-              <div className="articleItem shadow border rounded-md" key={index}>
-                <Link
-                  to={`/${item?.categoryName.toLowerCase()}/${item?.slug}/${item?._id}`}
-                  state={{ id: item._id }}
-                  className="rounded-md articleBg cursor-pointer h-40 flex"
-                  style={{ backgroundImage: 'url(' + imgUrl + ')' }}
-                ></Link>
-                <div className="rounded-md px-5 py-2 cursor-pointer flex flex-col">
+        {articles?.length > 0 ? (
+          <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-10">
+            {articles?.map((item, index) => {
+              var imgUrl = item?.image
+                ? item?.image
+                : 'resources/images/article.png';
+              return (
+                <div
+                  className="articleItem shadow border rounded-md"
+                  key={index}
+                >
                   <Link
-                    className="text-green-500 font-semibold cursor-pointer mt-2"
-                    to={`/category/${item?.categoryName.toLowerCase()}`}
-                    state={{ id: item.categoryId }}
-                  >
-                    {item?.categoryName}
-                  </Link>
-                  <Link
-                    to={`/${item?.categoryName.toLowerCase()}/${item?.slug}/${item?._id}`}
+                    to={`/${item?.categoryName.toLowerCase()}/${item?.slug}/${
+                      item?._id
+                    }`}
                     state={{ id: item._id }}
-                    className="cursor-pointer text-xl font-bold"
-                  >
-                    {item?.title}
-                  </Link>
-                  <div>
-                    {item?.tags.map((sitem, index) => {
-                      return (
-                        <Link
-                          to={`/tag/${sitem}`}
-                          state={{ id: item._id }}
-                          className="text-cyan-400 cursor-pointer"
-                          key={index}
-                        >
-                          #{sitem}{' '}
-                        </Link>
-                      );
-                    })}
+                    className="rounded-md articleBg cursor-pointer h-40 flex"
+                    style={{ backgroundImage: 'url(' + imgUrl + ')' }}
+                  ></Link>
+                  <div className="rounded-md px-5 py-2 cursor-pointer flex flex-col">
+                    <Link
+                      className="text-green-500 font-semibold cursor-pointer mt-2"
+                      to={`/category/${item?.categoryName.toLowerCase()}`}
+                      state={{ id: item.categoryId }}
+                    >
+                      {item?.categoryName}
+                    </Link>
+                    <Link
+                      to={`/${item?.categoryName.toLowerCase()}/${item?.slug}/${
+                        item?._id
+                      }`}
+                      state={{ id: item._id }}
+                      className="cursor-pointer text-xl font-bold"
+                    >
+                      {item?.title}
+                    </Link>
+                    <div>
+                      {item?.tags.map((sitem, index) => {
+                        return (
+                          <Link
+                            to={`/tag/${sitem}`}
+                            state={{ id: item._id }}
+                            className="text-cyan-400 cursor-pointer"
+                            key={index}
+                          >
+                            #{sitem}{' '}
+                          </Link>
+                        );
+                      })}
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="flex justify-center items-center mt-10">No Data Found</div>
+        )}
       </div>
     </>
   );

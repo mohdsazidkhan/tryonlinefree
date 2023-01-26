@@ -25,6 +25,7 @@ import Articles from './pages/posts/articles';
 import Tags from './pages/tags/tags';
 import TagPosts from './pages/tags/tagPosts';
 import NoPage from './pages/nopage';
+import EditArticle from './pages/admin/editarticle';
 
 const breakpoints = {
   sm: '320px',
@@ -54,6 +55,7 @@ function App() {
           <Route path="/all-users" element={<AllUsers />} />
           <Route path="/users" element={<Users />} />
           <Route path="/add-article" element={<AddArticle />} />
+          <Route path="/edit-article/:postID" element={<EditArticle />} />
           <Route path="/:category/:slug/:postID" element={<ArticleDetail />} />
           <Route path="/category/:categoryName" element={<CategoryArticles />} />
           <Route path="/categories" element={<Categories />} />

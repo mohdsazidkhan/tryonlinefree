@@ -70,53 +70,64 @@ const TagPosts = () => {
       )}
       <Navbar />
       <div className="container mx-auto py-5 m-5">
-        <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-          {articles?.map((item, index) => {
-            var imgUrl = item?.image
-              ? item?.image
-              : 'resources/images/article.png';
-            return (
-              <div className="articleItem shadow border rounded-md" key={index}>
-                <Link
-                  to={`/${item?.categoryName.toLowerCase()}/${item?.slug}/${item?._id}`}
-                  state = {{ id: item._id }}
-                  className="rounded-md articleBg cursor-pointer h-40 flex"
-                  style={{ backgroundImage: 'url(' + imgUrl + ')' }}
-                ></Link>
-                <div className="rounded-md px-5 py-2 cursor-pointer flex flex-col">
+        {articles?.length > 0 ? (
+          <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {articles?.map((item, index) => {
+              var imgUrl = item?.image
+                ? item?.image
+                : 'resources/images/article.png';
+              return (
+                <div
+                  className="articleItem shadow border rounded-md"
+                  key={index}
+                >
                   <Link
-                    className="text-green-500 font-semibold cursor-pointer mt-2"
-                    to={`/category/${item?.categoryName.toLowerCase()}`}
-                    state = {{ id: item.categoryId }}
-                  >
-                    {item?.categoryName}
-                  </Link>
-                  <Link
-                    to={`/${item?.categoryName.toLowerCase()}/${item?.slug}/${item?._id}`}
-                    state = {{ id: item._id }}
-                    className="cursor-pointer text-xl font-bold"
-                  >
-                    {item?.title}
-                  </Link>
-                  <div>
-                    {item?.tags.map((sitem, index) => {
-                      return (
-                        <Link
-                        to={`/tag/${sitem.toLowerCase()}`}
-                        state = {{ tag: sitem }}
-                        className="text-cyan-400 cursor-pointer"
-                        key={index}
-                        >
-                          #{sitem}{' '}
-                        </Link>
-                      );
-                    })}
+                    to={`/${item?.categoryName.toLowerCase()}/${item?.slug}/${
+                      item?._id
+                    }`}
+                    state={{ id: item._id }}
+                    className="rounded-md articleBg cursor-pointer h-40 flex"
+                    style={{ backgroundImage: 'url(' + imgUrl + ')' }}
+                  ></Link>
+                  <div className="rounded-md px-5 py-2 cursor-pointer flex flex-col">
+                    <Link
+                      className="text-green-500 font-semibold cursor-pointer mt-2"
+                      to={`/category/${item?.categoryName.toLowerCase()}`}
+                      state={{ id: item.categoryId }}
+                    >
+                      {item?.categoryName}
+                    </Link>
+                    <Link
+                      to={`/${item?.categoryName.toLowerCase()}/${item?.slug}/${
+                        item?._id
+                      }`}
+                      state={{ id: item._id }}
+                      className="cursor-pointer text-xl font-bold"
+                    >
+                      {item?.title}
+                    </Link>
+                    <div>
+                      {item?.tags.map((sitem, index) => {
+                        return (
+                          <Link
+                            to={`/tag/${sitem.toLowerCase()}`}
+                            state={{ tag: sitem }}
+                            className="text-cyan-400 cursor-pointer"
+                            key={index}
+                          >
+                            #{sitem}{' '}
+                          </Link>
+                        );
+                      })}
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="flex justify-center items-center">No Data Found</div>
+        )}
       </div>
     </>
   );
