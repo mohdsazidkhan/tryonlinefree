@@ -152,25 +152,18 @@ const AddArticle = () => {
   };
 
   function handleKeyPress(e) {
-    console.log(e, ' e eeeee')
-    if(e.charCode === 13 || e.which === 13){
-      const value = e.target.value;
-      if (!value.trim()) return false;
-      setTags([...tags, value.toLowerCase()]);
-      e.target.value = '';
-    }else{
-      return false
+    if(e.target.value !== ''){
+      const value = e.target.value.split(',');
+      console.log(value)
+      setTags(value);
     }
-    // if (e.key !== 'Enter') return;
-    // const value = e.target.value;
-    // if (!value.trim()) return;
-    // setTags([...tags, value.toLowerCase()]);
-    // e.target.value = '';
+    e.target.value = ''
   }
 
   function removeTag(index) {
     setTags(tags.filter((el, i) => i !== index));
   }
+  
   let imgUrl = ''
   imgUrl = imageBase64 ? imageBase64 : require('../../resources/images/article.png')
   return (
@@ -254,8 +247,8 @@ const AddArticle = () => {
                       <Input
                         name="tag"
                         type="text"
-                        placeholder="Enter tag & press enter"
-                        onKeyPress={handleKeyPress}
+                        placeholder="Enter tag comma separated"
+                        onBlur={handleKeyPress}
                       />
                     </div>
                   </FormControl>
