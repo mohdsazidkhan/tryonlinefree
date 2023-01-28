@@ -226,7 +226,7 @@ const EditArticle = () => {
           <Sidebar />
           <Box flex="1" className="content">
             <Heading textAlign="center" color="teal.400">
-              Add Article
+              Update Article
             </Heading>
             <Box maxW={{ base: '100%' }}>
               <form>
