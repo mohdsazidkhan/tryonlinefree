@@ -151,8 +151,9 @@ const AddArticle = () => {
       });
   };
 
-  function handleKeyDown(e) {
-    if(e.keyCode === 13){
+  function handleKeyPress(e) {
+    console.log(e, ' e eeeee')
+    if(e.charCode === 13 || e.which === 13){
       const value = e.target.value;
       if (!value.trim()) return false;
       setTags([...tags, value.toLowerCase()]);
@@ -254,7 +255,7 @@ const AddArticle = () => {
                         name="tag"
                         type="text"
                         placeholder="Enter tag & press enter"
-                        onKeyDown={handleKeyDown}
+                        onKeyPress={handleKeyPress}
                       />
                     </div>
                   </FormControl>
