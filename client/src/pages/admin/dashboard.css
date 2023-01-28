@@ -17,6 +17,10 @@
 }
 .chakra-ui-light .leftMenu a{
     border-bottom: 1px solid #ccc;
+    color: #000;
+}
+.chakra-ui-light .dashboardGrids a{
+    color: #000;
 }
 .dashGridItem{
     display: flex;

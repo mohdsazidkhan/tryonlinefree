@@ -152,11 +152,19 @@ const AddArticle = () => {
   };
 
   function handleKeyDown(e) {
-    if (e.key !== 'Enter') return;
-    const value = e.target.value;
-    if (!value.trim()) return;
-    setTags([...tags, value.toLowerCase()]);
-    e.target.value = '';
+    if(e.keyCode === 13){
+      const value = e.target.value;
+      if (!value.trim()) return false;
+      setTags([...tags, value.toLowerCase()]);
+      e.target.value = '';
+    }else{
+      return false
+    }
+    // if (e.key !== 'Enter') return;
+    // const value = e.target.value;
+    // if (!value.trim()) return;
+    // setTags([...tags, value.toLowerCase()]);
+    // e.target.value = '';
   }
 
   function removeTag(index) {
