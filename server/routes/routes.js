@@ -9,7 +9,6 @@ const salt = 10;
 const JWT_SECRET = process.env.JWT_SECRET;
 const cloudinary = require("../cloudinary");
 const uploader = require("../multer");
-const mongoose = require("mongoose");
 
 router.post("/register", async (req, res) => {
   let { name, phone, email, password } = req.body;
@@ -27,22 +26,22 @@ router.post("/register", async (req, res) => {
         },
       });
     } else {
-      let user = new User({ name, phone, email, password, userType });
-      user
-        .save()
-        .then((user) => {
-          res.status(201).json({
-            success: true,
-            message: "User Created successfully!",
-            data: user,
-          });
-        })
-        .catch((error) => {
-          res.status(400).json({
-            error: error,
-            success: false,
-          });
+    let user = new User({ name, phone, email, password, userType });
+    user
+      .save()
+      .then((user) => {
+        res.status(201).json({
+          success: true,
+          message: "User Created successfully!",
+          data: user,
         });
+      })
+      .catch((error) => {
+        res.status(400).json({
+          error: error,
+          success: false,
+        });
+      });
     }
   });
 });
