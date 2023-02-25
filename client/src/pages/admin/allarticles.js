@@ -26,7 +26,7 @@ import {
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
-import { EditIcon, DeleteIcon } from '@chakra-ui/icons';
+import { EditIcon, DeleteIcon, ArrowUpIcon } from '@chakra-ui/icons';
 import axios from 'axios';
 import { variables } from '../../config/config';
 import moment from 'moment';
@@ -42,7 +42,7 @@ const AllArticles = () => {
   const [userArticles, setUserArticles] = useState([]);
   const [userType, setUserType] = useState('');
   const [articleId, setArticleId] = useState(null);
-
+  const [scroll, setScroll] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [size, setSize] = useState('md')
 
@@ -103,6 +103,9 @@ const AllArticles = () => {
   };
 
   useEffect(() => {
+    window.addEventListener("scroll", () => {
+      setScroll(window.scrollY > 100);
+    });
     getArticles();
     let user = JSON.parse(localStorage.getItem('user'));
     const userId = user?._id;
@@ -290,6 +293,9 @@ const AllArticles = () => {
           </ModalFooter>
         </ModalContent>
       </Modal>
+      <div style={{display: scroll ? 'flex': 'none'}} className="scrollTop" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
+        <ArrowUpIcon />
+      </div>
     </>
   );
 };

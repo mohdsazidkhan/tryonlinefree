@@ -22,6 +22,7 @@ import {
   TwitterShareButton,
   WhatsappShareButton,
 } from 'react-share';
+import { ArrowUpIcon } from '@chakra-ui/icons';
 
 const ArticleDetail = () => {
   let params = useParams()
@@ -32,6 +33,7 @@ const ArticleDetail = () => {
   const [message, setMessage] = useState('');
   const [tooltopTitle, setToolTipTitle] = useState('');
   const [article, setArticle] = useState([]);
+  const [scroll, setScroll] = useState(false);
 
   const getArticle = () => {
     axios
@@ -60,7 +62,11 @@ const ArticleDetail = () => {
   };
 
   useEffect(() => {
+    window.addEventListener("scroll", () => {
+      setScroll(window.scrollY > 100);
+    });
     getArticle();
+    
   }, []);
 
   var imgUrl = article?.image
@@ -264,6 +270,9 @@ const ArticleDetail = () => {
           </div>
         </div>
         }
+      </div>
+      <div style={{display: scroll ? 'flex': 'none'}} className="scrollTop" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
+        <ArrowUpIcon />
       </div>
     </>
   );

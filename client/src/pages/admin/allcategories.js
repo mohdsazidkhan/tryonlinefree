@@ -16,7 +16,7 @@ import {
   Spinner
 } from '@chakra-ui/react';
 import Navbar from '../../components/Navbar';
-import { EditIcon, DeleteIcon } from '@chakra-ui/icons';
+import { EditIcon, DeleteIcon, ArrowUpIcon } from '@chakra-ui/icons';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { variables } from '../../config/config';
@@ -28,6 +28,7 @@ const AllCategories = () => {
   const [message, setMessage] = useState('');
   const [tooltopTitle, setToolTipTitle] = useState('');
   const [categories, setCategories] = useState([]);
+  const [scroll, setScroll] = useState(false);
 
   const getCategories = () => {
     axios
@@ -56,6 +57,9 @@ const AllCategories = () => {
   };
 
   useEffect(() => {
+    window.addEventListener("scroll", () => {
+      setScroll(window.scrollY > 100);
+    });
     getCategories();
   }, []);
   return (
@@ -132,6 +136,9 @@ const AllCategories = () => {
             </TableContainer>
           </Box>
         </Flex>
+      </div>
+      <div style={{display: scroll ? 'flex': 'none'}} className="scrollTop" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
+        <ArrowUpIcon />
       </div>
     </>
   );

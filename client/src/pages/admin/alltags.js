@@ -18,7 +18,7 @@ import {
 } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
-import { EditIcon, DeleteIcon } from '@chakra-ui/icons';
+import { EditIcon, DeleteIcon, ArrowUpIcon } from '@chakra-ui/icons';
 import { variables } from '../../config/config';
 import axios from 'axios';
 import Sidebar from './sidebar';
@@ -29,7 +29,8 @@ const AllTags = () => {
   const [message, setMessage] = useState('');
   const [tooltopTitle, setToolTipTitle] = useState('');
   const [tags, setTags] = useState([]);
-
+  const [scroll, setScroll] = useState(false);
+  
   const getTags = () => {
     axios
       .get(`${variables.BASE_URL}/all-tags`)
@@ -68,6 +69,9 @@ const AllTags = () => {
   }
 
   useEffect(() => {
+    window.addEventListener("scroll", () => {
+      setScroll(window.scrollY > 100);
+    });
     getTags();
   }, []);
 
@@ -145,6 +149,9 @@ const AllTags = () => {
             </TableContainer>
           </Box>
         </Flex>
+      </div>
+      <div style={{display: scroll ? 'flex': 'none'}} className="scrollTop" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
+        <ArrowUpIcon />
       </div>
     </>
   );

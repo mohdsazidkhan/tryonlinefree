@@ -10,6 +10,7 @@ import {
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { variables } from '../../config/config';
+import { ArrowUpIcon } from '@chakra-ui/icons';
 
 const Categories = () => {
   const [isLoading, setLoading] = useState(true);
@@ -18,6 +19,7 @@ const Categories = () => {
   const [message, setMessage] = useState('');
   const [tooltopTitle, setToolTipTitle] = useState('');
   const [categories, setCategories] = useState([]);
+  const [scroll, setScroll] = useState(false);
 
   const getCategories = () => {
     axios
@@ -46,6 +48,9 @@ const Categories = () => {
   };
 
   useEffect(() => {
+    window.addEventListener("scroll", () => {
+      setScroll(window.scrollY > 100);
+    });
     getCategories();
   }, []);
   return (
@@ -93,6 +98,9 @@ const Categories = () => {
         ) : (
           <div className="flex justify-center items-center">No Data Found</div>
         )}
+      </div>
+      <div style={{display: scroll ? 'flex': 'none'}} className="scrollTop" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
+        <ArrowUpIcon />
       </div>
     </>
   );
