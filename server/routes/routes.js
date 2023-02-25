@@ -293,7 +293,7 @@ router.get("/all-categories", function (req, res) {
         data: categories,
       });
     }
-  });
+  }).sort({createdAt:-1});
 });
 
 router.get("/all-tags", function (req, res) {
@@ -306,7 +306,7 @@ router.get("/all-tags", function (req, res) {
         data: articles,
       });
     }
-  }).projection({ tags: 1 });
+  }).sort({createdAt:-1}).projection({ tags: 1 });
 });
 
 router.get("/article/:id", function (req, res) {
@@ -375,7 +375,7 @@ router.get("/all-articles", function (req, res) {
         data: articles,
       });
     }
-  });
+  }).sort({createdAt:-1});
 });
 
 router.get("/all-users", function (req, res) {
@@ -388,7 +388,7 @@ router.get("/all-users", function (req, res) {
         data: users,
       });
     }
-  }).select("-password");
+  }).select("-password").sort({createdAt:-1});
 });
 
 const verifyUserLogin = async (email, password) => {

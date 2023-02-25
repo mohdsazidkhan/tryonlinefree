@@ -1,7 +1,7 @@
 .chakra-ui-light .navbar a{
     color: #333;
 }
-.chakra-ui-light button{
+.chakra-ui-light .navbar button{
     background: #55c9c7;
     color: #fff;
 }

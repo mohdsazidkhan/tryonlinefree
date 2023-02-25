@@ -113,6 +113,36 @@ menu {
 .fullscreenEditor .quill {
   height: 50vh;
 }
+.allCategories{
+  display: flex;
+  overflow-x: scroll;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  padding: 0 10px;
+  transition: all .3s;
+  -webkit-transition: all .3s;
+  -moz-transition: all .3s;
+  -ms-transition: all .3s;
+  -o-transition: all .3s;
+}
+.fixedTabs{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 10px;
+  background: rgb(0 0 0);
+  transition: all .3s;
+  -webkit-transition: all .3s;
+  -moz-transition: all .3s;
+  -ms-transition: all .3s;
+  -o-transition: all .3s;
+}
+.fixedTabs button{
+  font-size: 14px;
+}
 .fullscreen,
 .miniscreen {
   position: absolute;
@@ -280,7 +310,33 @@ menu {
   margin: 5px 0;
   display: inline-block;
 }
+.chakra-ui-light .activeClass{
+  background: rgb(179 255 207) !important
+}
+.chakra-ui-dark .activeClass{
+  background: rgb(30, 173, 83) !important
+}
+.scrollTop{
+  position: fixed;
+  bottom: 50px;
+  right: 15px;
+  background: #4caf50;
+  width: 50px;
+  height: 45px;
+  justify-content: center;
+  align-items: center;
+  font-size: 36px;
+  border-radius: 4px;
+  box-shadow: 0 0 3px rgb(0 0 0);
+}
 @media screen and (max-width: 768px) {
+  .menuBar{
+    position: absolute;
+    top: 17px;
+    right: 70px;
+    padding: 7px 8px;
+    border-radius: 4px;
+  }
   .articleDetailBg {
     height: 10rem;
   }

@@ -5,18 +5,57 @@ import {
   AlertIcon,
   AlertTitle,
   AlertDescription,
+  Button
 } from '@chakra-ui/react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { variables } from '../config/config';
+import { ArrowUpIcon } from '@chakra-ui/icons'
 
 const Home = () => {
+
   const [showAlert, setShowAlert] = useState(false);
   const [errorType, seErrorType] = useState(false);
   const [message, setMessage] = useState('');
   const [tooltopTitle, setToolTipTitle] = useState('');
   const [categories, setCategories] = useState([]);
   const [articles, setArticles] = useState([]);
+  const [categoryID, setCategoryID] = useState(null);
+  const [scroll, setScroll] = useState(false);
+
+  const handleTabClick = (catId) =>{
+    if(catId === null){
+      getArticles()
+      setCategoryID(null)
+    }else{
+      getArticlesByCategoryID(catId)
+      setCategoryID(catId)
+    }
+  }
+
+  const getArticlesByCategoryID = (categoryId) => {
+    axios
+      .get(`${variables.BASE_URL}/category-articles/${categoryId}`)
+      .then(response => {
+        if (response.data.success) {
+          setToolTipTitle('Success');
+          setMessage(response.data.message);
+          seErrorType(response.data.success);
+          setArticles(response.data.data);
+        }
+      })
+      .catch(error => {
+        if (error.response.data.success === false) {
+          seErrorType(error.response.data.success);
+          setToolTipTitle(error.response.data.error.name);
+          setMessage(error.response.data.error.message);
+          setShowAlert(true);
+          setTimeout(() => {
+            setShowAlert(false);
+          }, 3000);
+        }
+      });
+  };
 
   const getCategories = () => {
     axios
@@ -69,6 +108,9 @@ const Home = () => {
   useEffect(() => {
     getCategories();
     getArticles();
+    window.addEventListener("scroll", () => {
+      setScroll(window.scrollY > 100);
+    });
   }, []);
   return (
     <>
@@ -92,17 +134,25 @@ const Home = () => {
         </>
       )}
       <Navbar />
-      <div className="container mx-auto py-5 m-5">
-        <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      
+      <div className="container mx-auto py-5">
+        <div className={`allCategories ${scroll ? "fixedTabs" : ""}`}>
+          <Button 
+            style={{minWidth:100}}
+            className={`rounded-xl border py-2 mr-2 flex text-center category cursor-pointer ${categoryID === null ? 'activeClass' : ''}`}
+            onClick={()=>handleTabClick(null)}
+          >
+            For You
+          </Button>
           {categories?.map((item, index) => (
-            <Link 
-              to={`/category/${item?.name.toLowerCase()}`}
-              state= {{ id: item._id }}
+            <Button 
               key={index}
-              className="rounded-xl border p-5 text-center category cursor-pointer"
+              style={{minWidth:100}}
+              onClick={()=>handleTabClick(item?._id)}
+              className={`rounded-xl border py-2 mr-2 flex text-center category cursor-pointer ${categoryID === item?._id ? 'activeClass' : ''}`}
             >
-              {item?.name}
-            </Link>
+              {item.name}
+            </Button>
           ))}
         </div>
         <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-10">
@@ -156,6 +206,9 @@ const Home = () => {
             );
           })}
         </div>
+      </div>
+      <div style={{display: scroll ? 'flex': 'none'}} className="scrollTop" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
+        <ArrowUpIcon />
       </div>
     </>
   );
