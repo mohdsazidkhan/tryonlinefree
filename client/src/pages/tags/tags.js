@@ -5,13 +5,14 @@ import {
   AlertIcon,
   AlertTitle,
   AlertDescription,
+  Spinner,
 } from '@chakra-ui/react';
 import axios from 'axios';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { variables } from '../../config/config';
 
 const Tags = () => {
-  const navigate = useNavigate();
+  const [isLoading, setLoading] = useState(true);
   const [showAlert, setShowAlert] = useState(false);
   const [errorType, seErrorType] = useState(false);
   const [message, setMessage] = useState('');
@@ -27,6 +28,7 @@ const Tags = () => {
           setMessage(response.data.message);
           seErrorType(response.data.success);
           setTags(response.data.data);
+          setLoading(false)
         }
       })
       .catch(error => {
@@ -35,6 +37,7 @@ const Tags = () => {
           setToolTipTitle(error.response.data.error.name);
           setMessage(error.response.data.error.message);
           setShowAlert(true);
+          setLoading(false)
           setTimeout(() => {
             setShowAlert(false);
           }, 3000);
@@ -43,15 +46,14 @@ const Tags = () => {
   };
 
   const uniqueTags = [];
-  {
-    tags?.map(item => {
-      item.tags.map(sitem => {
-        if (uniqueTags.indexOf(sitem) === -1) {
-          uniqueTags.push(sitem);
-        }
-      });
+  tags?.map(item => {
+    item.tags.map(sitem => {
+      if (uniqueTags.indexOf(sitem) === -1) {
+        uniqueTags.push(sitem);
+      }
     });
-  }
+  });
+  
 
   useEffect(() => {
     getTags();
@@ -80,7 +82,13 @@ const Tags = () => {
       )}
       <Navbar />
       <div className="container mx-auto py-5 m-5">
-        {uniqueTags?.length > 0 ? (
+      {isLoading 
+      ? 
+      <div className="text-center p-5">
+        <Spinner/>
+      </div>
+      :
+        uniqueTags?.length > 0 ? (
           <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {uniqueTags?.map((item, index) => (
               <Link

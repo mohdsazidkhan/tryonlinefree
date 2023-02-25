@@ -16,6 +16,7 @@ import {
   AvatarBadge,
   IconButton,
   Center,
+  Spinner
 } from '@chakra-ui/react'
 import Navbar from '../../components/Navbar';
 import './dashboard.css';
@@ -26,6 +27,7 @@ import Sidebar from './sidebar';
 import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
+  const [isLoading, setLoading] = useState(true);
   const navigate = useNavigate();
   const [showAlert, setShowAlert] = useState(false);
   const [errorType, seErrorType] = useState(false);
@@ -67,6 +69,7 @@ const Profile = () => {
           setMessage(response.data.message);
           seErrorType(response.data.success);
           setUserDetail(response.data.data);
+          setLoading(false)
         }
       })
       .catch(error => {
@@ -75,6 +78,7 @@ const Profile = () => {
           setToolTipTitle(error.response.data.error.name);
           setMessage(error.response.data.error.message);
           setShowAlert(true);
+          setLoading(false)
           setTimeout(() => {
             setShowAlert(false);
           }, 3000);
@@ -124,6 +128,7 @@ const Profile = () => {
     formData.append("facebook", facebook ? facebook : userDetail?.facebook);
     formData.append("instagram", instagram ? instagram : userDetail?.instagram);
     formData.append("twitter", twitter ? twitter : userDetail?.twitter);
+    setLoading(true)
     axios({
       method: 'post',
       url: `${variables.BASE_URL}/updateProfile`,
@@ -137,6 +142,7 @@ const Profile = () => {
           setMessage(response.data.message);
           seErrorType(response.data.success)
           setShowAlert(true);
+          setLoading(false)
           setTimeout(() => {
             setShowAlert(false);
             window.location.reload()
@@ -149,6 +155,7 @@ const Profile = () => {
           setToolTipTitle(error.response.data.error.name);
           setMessage(error.response.data.error.message);
           setShowAlert(true);
+          setLoading(false)
           setTimeout(() => {
             setShowAlert(false);
           }, 3000);
@@ -179,6 +186,12 @@ const Profile = () => {
 
       <Navbar />
       <div className='container mt-5 mx-auto'>
+      {isLoading 
+      ? 
+      <div className="text-center p-5">
+        <Spinner/>
+      </div>
+      :
         <Flex color="white" className="mainContent pb-5">
           <Sidebar />
           <Box flex="1" className="userProfile">
@@ -310,6 +323,7 @@ const Profile = () => {
             </Stack>
           </Box>
         </Flex>
+      }
       </div>
     </>
   );

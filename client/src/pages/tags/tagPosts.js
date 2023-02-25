@@ -5,15 +5,16 @@ import {
   AlertIcon,
   AlertTitle,
   AlertDescription,
+  Spinner
 } from '@chakra-ui/react';
 import axios from 'axios';
-import { useNavigate, Link, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { variables } from '../../config/config';
 
 const TagPosts = () => {
   const location = useLocation();
   let tag = location?.state?.tag;
-  const navigate = useNavigate();
+  const [isLoading, setLoading] = useState(true);
   const [showAlert, setShowAlert] = useState(false);
   const [errorType, seErrorType] = useState(false);
   const [message, setMessage] = useState('');
@@ -29,6 +30,7 @@ const TagPosts = () => {
           setMessage(response.data.message);
           seErrorType(response.data.success);
           setArticles(response.data.data);
+          setLoading(false)
         }
       })
       .catch(error => {
@@ -36,6 +38,7 @@ const TagPosts = () => {
           seErrorType(error.response.data.success);
           setToolTipTitle(error.response.data.error.name);
           setMessage(error.response.data.error.message);
+          setLoading(false)
           setShowAlert(true);
           setTimeout(() => {
             setShowAlert(false);
@@ -70,7 +73,13 @@ const TagPosts = () => {
       )}
       <Navbar />
       <div className="container mx-auto py-5 m-5">
-        {articles?.length > 0 ? (
+      {isLoading 
+      ? 
+      <div className="text-center p-5">
+        <Spinner/>
+      </div>
+      :
+        articles?.length > 0 ? (
           <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {articles?.map((item, index) => {
               var imgUrl = item?.image

@@ -1,7 +1,7 @@
 import { Box, Container, Flex, Grid, GridItem,Alert,
   AlertIcon,
   AlertTitle,
-  AlertDescription, } from '@chakra-ui/react';
+  AlertDescription,Spinner } from '@chakra-ui/react';
 import { Link, NavLink } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 import './dashboard.css';
@@ -10,6 +10,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Sidebar from './sidebar';
 const Dashboard = () => {
+  const [isLoading, setLoading] = useState(true);
   const [categories, setCategories] = useState([]);
   const [articles, setArticles] = useState([]);
   const [tags, setTags] = useState([]);
@@ -53,6 +54,7 @@ const Dashboard = () => {
       .then(response => {
         if (response.data.success) {
           setArticles(response.data.data);
+          setLoading(false)
         }
       })
       .catch(error => {
@@ -139,6 +141,12 @@ const Dashboard = () => {
       )}
       <Navbar />
       <div className='container mt-5 mx-auto'>
+      {isLoading 
+      ? 
+      <div className="text-center p-5">
+        <Spinner/>
+      </div>
+      :
         <Flex color="white" className="mainContent pb-5">
           <Sidebar />
           {userType === 'admin' ? (
@@ -241,6 +249,7 @@ const Dashboard = () => {
             </Box>
           )}
         </Flex>
+      }
       </div>
     </>
   );

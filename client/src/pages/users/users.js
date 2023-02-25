@@ -5,13 +5,14 @@ import {
   AlertIcon,
   AlertTitle,
   AlertDescription,
+  Spinner
 } from '@chakra-ui/react';
 import axios from 'axios';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { variables } from '../../config/config';
 
 const Users = () => {
-  const navigate = useNavigate();
+  const [isLoading, setLoading] = useState(true);
   const [showAlert, setShowAlert] = useState(false);
   const [errorType, seErrorType] = useState(false);
   const [message, setMessage] = useState('');
@@ -27,6 +28,7 @@ const Users = () => {
           setMessage(response.data.message);
           seErrorType(response.data.success);
           setUsers(response.data.data);
+          setLoading(false)
         }
       })
       .catch(error => {
@@ -35,6 +37,7 @@ const Users = () => {
           setToolTipTitle(error.response.data.error.name);
           setMessage(error.response.data.error.message);
           setShowAlert(true);
+          setLoading(false)
           setTimeout(() => {
             setShowAlert(false);
           }, 3000);
@@ -68,7 +71,13 @@ const Users = () => {
       )}
       <Navbar />
       <div className="container mx-auto py-5 m-5">
-        {users?.length > 0 ? (
+      {isLoading 
+      ? 
+      <div className="text-center p-5">
+        <Spinner/>
+      </div>
+      :
+        users?.length > 0 ? (
           <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {users?.map((item, index) => (
               <Link

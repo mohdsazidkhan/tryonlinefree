@@ -129,7 +129,7 @@ router.post(
   "/updateArticle/:articleId",
   uploader.single("image"),
   async (req, res) => {
-    console.log(req.body, " req.body");
+    //console.log(req.body, " req.body");
     if (req.body) {
       let {
         title,
@@ -344,7 +344,7 @@ router.get("/tag-articles/:tag", async function (req, res) {
   articles = articles?.filter(function (elm) {
     return elm?.tags?.indexOf(req?.params?.tag.toLowerCase()) >= 0;
   });
-  console.log(articles, " articles");
+  //console.log(articles, " articles");
   if (articles) {
     res.status(201).json({
       success: true,

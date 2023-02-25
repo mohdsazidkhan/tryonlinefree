@@ -14,6 +14,7 @@ import {
   AlertIcon,
   AlertTitle,
   AlertDescription,
+  Spinner
 } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
@@ -22,6 +23,7 @@ import { variables } from '../../config/config';
 import axios from 'axios';
 import Sidebar from './sidebar';
 const AllTags = () => {
+  const [isLoading, setLoading] = useState(true);
   const [showAlert, setShowAlert] = useState(false);
   const [errorType, seErrorType] = useState(false);
   const [message, setMessage] = useState('');
@@ -37,6 +39,7 @@ const AllTags = () => {
           setMessage(response.data.message);
           seErrorType(response.data.success);
           setTags(response.data.data);
+          setLoading(false)
         }
       })
       .catch(error => {
@@ -45,6 +48,7 @@ const AllTags = () => {
           setToolTipTitle(error.response.data.error.name);
           setMessage(error.response.data.error.message);
           setShowAlert(true);
+          setLoading(false)
           setTimeout(() => {
             setShowAlert(false);
           }, 3000);
@@ -107,7 +111,15 @@ const AllTags = () => {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {uniqueTags?.length > 0 ? (
+                {isLoading 
+                ? 
+                <Tr>
+                  <Td colSpan={2}>
+                    <div className='flex justify-center items-center'><Spinner/></div>
+                  </Td>
+                </Tr>
+                :
+                  uniqueTags?.length > 0 ? (
                     uniqueTags?.map((item, index) => (
                       <Tr key={index}>
                         <Td>{item}</Td>

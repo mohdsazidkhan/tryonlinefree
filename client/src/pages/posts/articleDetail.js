@@ -4,6 +4,7 @@ import {
   Alert,
   AlertIcon,
   AlertTitle,
+  Spinner,
   AlertDescription,
 } from '@chakra-ui/react';
 import axios from 'axios';
@@ -25,6 +26,7 @@ import {
 const ArticleDetail = () => {
   let params = useParams()
   let articleId = params?.postID;
+  const [isLoading, setLoading] = useState(true);
   const [showAlert, setShowAlert] = useState(false);
   const [errorType, seErrorType] = useState(false);
   const [message, setMessage] = useState('');
@@ -40,6 +42,7 @@ const ArticleDetail = () => {
           setMessage(response.data.message);
           seErrorType(response.data.success);
           setArticle(response.data.data);
+          setLoading(false)
         }
       })
       .catch(error => {
@@ -48,6 +51,7 @@ const ArticleDetail = () => {
           setToolTipTitle(error.response.data.error.name);
           setMessage(error.response.data.error.message);
           setShowAlert(true);
+          setLoading(false)
           setTimeout(() => {
             setShowAlert(false);
           }, 3000);
@@ -86,6 +90,12 @@ const ArticleDetail = () => {
       )}
       <Navbar />
       <div className="container mx-auto py-5 m-5">
+      {isLoading 
+      ? 
+      <div className="text-center p-5">
+        <Spinner/>
+      </div>
+      :
         <div className="articleDetailItem shadow border rounded-md">
           <div className="rounded-md px-5 py-2">
             <div className="flex flex-col">
@@ -253,6 +263,7 @@ const ArticleDetail = () => {
             <div dangerouslySetInnerHTML={{ __html: article?.content }} />
           </div>
         </div>
+        }
       </div>
     </>
   );

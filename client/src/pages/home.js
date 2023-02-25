@@ -5,7 +5,8 @@ import {
   AlertIcon,
   AlertTitle,
   AlertDescription,
-  Button
+  Button,
+  Spinner
 } from '@chakra-ui/react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -13,7 +14,7 @@ import { variables } from '../config/config';
 import { ArrowUpIcon } from '@chakra-ui/icons'
 
 const Home = () => {
-
+  const [isLoading, setLoading] = useState(true);
   const [showAlert, setShowAlert] = useState(false);
   const [errorType, seErrorType] = useState(false);
   const [message, setMessage] = useState('');
@@ -34,6 +35,7 @@ const Home = () => {
   }
 
   const getArticlesByCategoryID = (categoryId) => {
+    setLoading(true)
     axios
       .get(`${variables.BASE_URL}/category-articles/${categoryId}`)
       .then(response => {
@@ -42,6 +44,7 @@ const Home = () => {
           setMessage(response.data.message);
           seErrorType(response.data.success);
           setArticles(response.data.data);
+          setLoading(false)
         }
       })
       .catch(error => {
@@ -50,6 +53,7 @@ const Home = () => {
           setToolTipTitle(error.response.data.error.name);
           setMessage(error.response.data.error.message);
           setShowAlert(true);
+          setLoading(false)
           setTimeout(() => {
             setShowAlert(false);
           }, 3000);
@@ -74,6 +78,7 @@ const Home = () => {
           setToolTipTitle(error.response.data.error.name);
           setMessage(error.response.data.error.message);
           setShowAlert(true);
+          setLoading(false)
           setTimeout(() => {
             setShowAlert(false);
           }, 3000);
@@ -90,6 +95,7 @@ const Home = () => {
           setMessage(response.data.message);
           seErrorType(response.data.success);
           setArticles(response.data.data);
+          setLoading(false)
         }
       })
       .catch(error => {
@@ -98,6 +104,7 @@ const Home = () => {
           setToolTipTitle(error.response.data.error.name);
           setMessage(error.response.data.error.message);
           setShowAlert(true);
+          setLoading(false)
           setTimeout(() => {
             setShowAlert(false);
           }, 3000);
@@ -133,9 +140,16 @@ const Home = () => {
           </Alert>
         </>
       )}
+
       <Navbar />
-      
       <div className="container mx-auto py-5">
+      {isLoading 
+      ? 
+      <div className="text-center p-5">
+        <Spinner/>
+      </div>
+      :
+      <>
         <div className={`allCategories ${scroll ? "fixedTabs" : ""}`}>
           <Button 
             style={{minWidth:100}}
@@ -206,10 +220,13 @@ const Home = () => {
             );
           })}
         </div>
+        </>
+      }
       </div>
       <div style={{display: scroll ? 'flex': 'none'}} className="scrollTop" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
         <ArrowUpIcon />
       </div>
+      
     </>
   );
 };

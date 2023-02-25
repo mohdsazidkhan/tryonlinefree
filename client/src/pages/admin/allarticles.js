@@ -22,6 +22,7 @@ import {
   ModalCloseButton,
   ModalBody,
   ModalFooter,
+  Spinner
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
@@ -32,6 +33,7 @@ import moment from 'moment';
 import Sidebar from './sidebar';
 
 const AllArticles = () => {
+  const [isLoading, setLoading] = useState(true);
   const [showAlert, setShowAlert] = useState(false);
   const [errorType, seErrorType] = useState(false);
   const [message, setMessage] = useState('');
@@ -83,6 +85,7 @@ const AllArticles = () => {
           setMessage(response.data.message);
           seErrorType(response.data.success);
           setArticles(response.data.data);
+          setLoading(false)
         }
       })
       .catch(error => {
@@ -91,6 +94,7 @@ const AllArticles = () => {
           setToolTipTitle(error.response.data.error.name);
           setMessage(error.response.data.error.message);
           setShowAlert(true);
+          setLoading(false)
           setTimeout(() => {
             setShowAlert(false);
           }, 3000);
@@ -112,6 +116,7 @@ const AllArticles = () => {
           setMessage(response.data.message);
           seErrorType(response.data.success);
           setUserArticles(response.data.data);
+          setLoading(false)
         }
       })
       .catch(error => {
@@ -120,6 +125,7 @@ const AllArticles = () => {
           setToolTipTitle(error.response.data.error.name);
           setMessage(error.response.data.error.message);
           setShowAlert(true);
+          setLoading(false)
           setTimeout(() => {
             setShowAlert(false);
           }, 3000);
@@ -179,7 +185,15 @@ const AllArticles = () => {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {userType === 'admin' ? (
+                {isLoading 
+                ? 
+                <Tr>
+                  <Td colSpan={5}>
+                    <div className='flex justify-center items-center'><Spinner/></div>
+                  </Td>
+                </Tr>
+                :
+                userType === 'admin' ? (
                     <>
                     {articles?.length > 0 ?
                       articles?.map(item => (
@@ -225,7 +239,7 @@ const AllArticles = () => {
                       }
                     </>
                   ) : (
-                    <>
+                  <>
                       {userArticles?.map(item => (
                         <Tr key={item?._id}>
                           <Td>

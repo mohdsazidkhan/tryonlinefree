@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import {
   Box,
-  Container,
   Flex,
   Table,
   TableContainer,
@@ -14,14 +13,15 @@ import {
   AlertIcon,
   AlertTitle,
   AlertDescription,
+  Spinner
 } from '@chakra-ui/react';
-import { NavLink } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 import { EditIcon, DeleteIcon } from '@chakra-ui/icons';
 import axios from 'axios';
 import { variables } from '../../config/config';
 import Sidebar from './sidebar';
 const AllUsers = () => {
+  const [isLoading, setLoading] = useState(true);
   const [showAlert, setShowAlert] = useState(false);
   const [errorType, seErrorType] = useState(false);
   const [message, setMessage] = useState('');
@@ -37,6 +37,7 @@ const AllUsers = () => {
           setMessage(response.data.message);
           seErrorType(response.data.success);
           setUsers(response.data.data);
+          setLoading(false)
         }
       })
       .catch(error => {
@@ -45,6 +46,7 @@ const AllUsers = () => {
           setToolTipTitle(error.response.data.error.name);
           setMessage(error.response.data.error.message);
           setShowAlert(true);
+          setLoading(false)
           setTimeout(() => {
             setShowAlert(false);
           }, 3000);
@@ -98,7 +100,15 @@ const AllUsers = () => {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {users?.length > 0 ? (
+                {isLoading 
+                ? 
+                <Tr>
+                  <Td colSpan={5}>
+                    <div className='flex justify-center items-center'><Spinner/></div>
+                  </Td>
+                </Tr>
+                :
+                users?.length > 0 ? (
                     users?.map((item, index) => (
                       <Tr key={index}>
                         <Td>{item.name}</Td>

@@ -6,15 +6,16 @@ import {
   AlertTitle,
   AlertDescription,
   Avatar,
+  Spinner
 } from '@chakra-ui/react';
 import axios from 'axios';
-import { useNavigate, Link, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { variables } from '../../config/config';
 
 const Profile = () => {
+  const [isLoading, setLoading] = useState(true);
   const location = useLocation();
   let userId = location?.state?.id;
-  const navigate = useNavigate();
   const [showAlert, setShowAlert] = useState(false);
   const [errorType, seErrorType] = useState(false);
   const [message, setMessage] = useState('');
@@ -31,6 +32,7 @@ const Profile = () => {
           setMessage(response.data.message);
           seErrorType(response.data.success);
           setArticles(response.data.data);
+          setLoading(false)
         }
       })
       .catch(error => {
@@ -39,6 +41,7 @@ const Profile = () => {
           setToolTipTitle(error.response.data.error.name);
           setMessage(error.response.data.error.message);
           setShowAlert(true);
+          setLoading(false)
           setTimeout(() => {
             setShowAlert(false);
           }, 3000);
@@ -47,6 +50,7 @@ const Profile = () => {
   };
 
   const getUserDetail = () => {
+    setLoading(true)
     axios
       .get(`${variables.BASE_URL}/user-detail/${userId}`)
       .then(response => {
@@ -55,6 +59,7 @@ const Profile = () => {
           setMessage(response.data.message);
           seErrorType(response.data.success);
           setUserDetail(response.data.data);
+          setLoading(false)
         }
       })
       .catch(error => {
@@ -62,6 +67,7 @@ const Profile = () => {
           seErrorType(error.response.data.success);
           setToolTipTitle(error.response.data.error.name);
           setMessage(error.response.data.error.message);
+          setLoading(false)
           setShowAlert(true);
           setTimeout(() => {
             setShowAlert(false);
@@ -96,12 +102,20 @@ const Profile = () => {
         </>
       )}
       <Navbar />
+      {isLoading 
+      ? 
+      <div className="container mx-auto">
+        <div className="text-center p-5">
+          <Spinner/>
+        </div>
+      </div>
+      :
       <div className="container mx-auto py-5 m-5">
         <div className="rounded-xl border p-5 text-center category">
           <Avatar size="xl" src={userDetail?.image}></Avatar>
           <div className="text-green-600 mt-2">{userDetail?.name}</div>
           <div className="flex justify-center items-center mt-2">
-            <a href={userDetail?.facebook} target="_blank">
+            <a href={userDetail?.facebook} target="_blank" rel="noreferrer">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 48 48"
@@ -118,7 +132,7 @@ const Profile = () => {
                 />
               </svg>
             </a>
-            <a href={userDetail?.instagram} target="_blank">
+            <a href={userDetail?.instagram} target="_blank" rel="noreferrer">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 48 48"
@@ -216,7 +230,7 @@ const Profile = () => {
                 </g>
               </svg>
             </a>
-            <a href={userDetail?.twitter} target="_blank">
+            <a href={userDetail?.twitter} target="_blank" rel="noreferrer">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 48 48"
@@ -229,7 +243,7 @@ const Profile = () => {
                 />
               </svg>
             </a>
-            <a href={userDetail?.linkedin} target="_blank">
+            <a href={userDetail?.linkedin} target="_blank" rel="noreferrer">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 48 48"
@@ -246,7 +260,7 @@ const Profile = () => {
                 />
               </svg>
             </a>
-            <a href={userDetail?.github} target="_blank">
+            <a href={userDetail?.github} target="_blank" rel="noreferrer">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 48 48"
@@ -336,6 +350,7 @@ const Profile = () => {
           <div className="flex justify-center items-center mt-10">No Data Found</div>
         )}
       </div>
+      }
     </>
   );
 };
