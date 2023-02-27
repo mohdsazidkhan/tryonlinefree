@@ -388,7 +388,7 @@ router.get("/all-users", function (req, res) {
         data: users,
       });
     }
-  }).select("-password").sort({createdAt:-1});
+  }).sort({createdAt:-1}).select("-password");
 });
 
 const verifyUserLogin = async (email, password) => {
