@@ -337,7 +337,7 @@ router.get("/category-articles/:id", function (req, res) {
       });
     }
   });
-}).sort({createdAt:-1});
+});
 
 router.get("/tag-articles/:tag", async function (req, res) {
   let articles = await Articles.find({});
@@ -363,7 +363,7 @@ router.get("/user-articles/:userId", async function (req, res) {
       data: articles,
     });
   }
-}).sort({createdAt:-1});
+});
 
 router.get("/all-articles", function (req, res) {
   Articles.find({}, function (err, articles) {
@@ -388,7 +388,7 @@ router.get("/all-users", function (req, res) {
         data: users,
       });
     }
-  }).sort({createdAt:-1}).select("-password");
+  }).select("-password");
 });
 
 const verifyUserLogin = async (email, password) => {
