@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import BottomMenu from '../../components/BottomMenu'
 import {
   Box,
   Flex,
@@ -296,6 +297,7 @@ const AllArticles = () => {
       <div style={{display: scroll ? 'flex': 'none'}} className="scrollTop" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
         <ArrowUpIcon />
       </div>
+      <BottomMenu />
     </>
   );
 };

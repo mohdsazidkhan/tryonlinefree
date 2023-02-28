@@ -15,6 +15,7 @@ import {
   AlertDescription,
   Spinner
 } from '@chakra-ui/react';
+import BottomMenu from '../../components/BottomMenu'
 import Navbar from '../../components/Navbar';
 import { EditIcon, DeleteIcon, ArrowUpIcon } from '@chakra-ui/icons';
 import axios from 'axios';
@@ -145,6 +146,7 @@ const AllUsers = () => {
       <div style={{display: scroll ? 'flex': 'none'}} className="scrollTop" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
         <ArrowUpIcon />
       </div>
+      <BottomMenu />
     </>
   );
 };

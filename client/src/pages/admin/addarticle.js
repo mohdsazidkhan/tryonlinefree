@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import BottomMenu from '../../components/BottomMenu'
 import {
   Box,
   Flex,
@@ -188,7 +189,7 @@ const AddArticle = () => {
         </>
       )}
       <Navbar />
-      <div className='container mt-5 mx-auto'>
+      <div className='container mt-5 mb-5 mx-auto'>
         <Flex color="white" className="mainContent pb-5">
           <Sidebar />
           <Box flex="1" className="content">
@@ -301,6 +302,7 @@ const AddArticle = () => {
           </Box>
         </Flex>
       </div>
+      <BottomMenu />
     </>
   );
 };

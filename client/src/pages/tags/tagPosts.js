@@ -11,6 +11,7 @@ import axios from 'axios';
 import { Link, useLocation } from 'react-router-dom';
 import { variables } from '../../config/config';
 import { ArrowUpIcon } from '@chakra-ui/icons';
+import BottomMenu from '../../components/BottomMenu'
 
 const TagPosts = () => {
   const location = useLocation();
@@ -23,6 +24,32 @@ const TagPosts = () => {
   const [tooltopTitle, setToolTipTitle] = useState('');
   const [articles, setArticles] = useState([]);
 
+  const handleTagClick = (stag) => {
+    setLoading(true)
+    axios
+    .get(`${variables.BASE_URL}/tag-articles/${stag}`)
+    .then(response => {
+      if (response.data.success) {
+        setToolTipTitle('Success');
+        setMessage(response.data.message);
+        seErrorType(response.data.success);
+        setArticles(response.data.data);
+        setLoading(false)
+      }
+    })
+    .catch(error => {
+      if (error.response.data.success === false) {
+        seErrorType(error.response.data.success);
+        setToolTipTitle(error.response.data.error.name);
+        setMessage(error.response.data.error.message);
+        setLoading(false)
+        setShowAlert(true);
+        setTimeout(() => {
+          setShowAlert(false);
+        }, 3000);
+      }
+    });
+  }
   const getArticles = () => {
     axios
       .get(`${variables.BASE_URL}/tag-articles/${tag}`)
@@ -123,14 +150,14 @@ const TagPosts = () => {
                     <div>
                       {item?.tags.map((sitem, index) => {
                         return (
-                          <Link
-                            to={`/tag/${sitem.toLowerCase()}`}
+                          <span
+                            onClick={()=>handleTagClick(sitem)}
                             state={{ tag: sitem }}
                             className="text-cyan-400 cursor-pointer"
                             key={index}
                           >
                             #{sitem}{' '}
-                          </Link>
+                          </span>
                         );
                       })}
                     </div>
@@ -146,6 +173,7 @@ const TagPosts = () => {
       <div style={{display: scroll ? 'flex': 'none'}} className="scrollTop" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
         <ArrowUpIcon />
       </div>
+      <BottomMenu />
     </>
   );
 };

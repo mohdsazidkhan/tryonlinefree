@@ -18,6 +18,7 @@ import {
   Center,
   Spinner
 } from '@chakra-ui/react'
+import BottomMenu from '../../components/BottomMenu'
 import Navbar from '../../components/Navbar';
 import './dashboard.css';
 import { variables } from '../../config/config';
@@ -325,6 +326,7 @@ const Profile = () => {
         </Flex>
       }
       </div>
+      <BottomMenu />
     </>
   );
 };

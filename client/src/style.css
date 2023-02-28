@@ -120,7 +120,7 @@ menu {
   align-items: center;
   flex-wrap: nowrap;
   white-space: nowrap;
-  padding: 0 10px;
+  padding: 0;
   transition: all .3s;
   -webkit-transition: all .3s;
   -moz-transition: all .3s;
@@ -330,13 +330,44 @@ menu {
   border-radius: 4px;
   box-shadow: 0 0 3px rgb(0 0 0);
 }
+.bottomMobileMenu{
+  display: none;
+}
 @media screen and (max-width: 768px) {
+  .bottomMobileMenu{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: auto;
+  }
+  .chakra-ui-dark .bottomMobileMenu{
+    background: #060c16;
+  }
+  .chakra-ui-light .bottomMobileMenu{
+    background: #edf2f7;
+    box-shadow: 0 -1px 5px 0 rgb(0 0 0 / 22%);
+  }
+  .chakra-ui-dark .bottomMobileMenu .menuItem.active{
+    background: rgb(30 173 83);
+  }
+  .chakra-ui-light .bottomMobileMenu .menuItem.active{
+    background: rgb(179 255 207);
+  }
+  .bottomMobileMenu .menuItem{
+    padding: 10px 15px;
+    cursor: pointer;
+  }
   .menuBar{
     position: absolute;
     top: 17px;
     right: 70px;
     padding: 7px 8px;
     border-radius: 4px;
+    display: block !important;
   }
   .articleDetailBg {
     height: 10rem;
@@ -347,7 +378,7 @@ menu {
   }
   .mainContent {
     display: block !important;
-    margin-top: 20px;
+    margin-top: 0;
   }
   .content {
     display: block !important;
@@ -390,6 +421,7 @@ menu {
     position: absolute;
     right: 24px;
     z-index: 99;
+    display: block !important
   }
   .container {
     padding: 10px;

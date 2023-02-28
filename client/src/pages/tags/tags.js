@@ -7,6 +7,7 @@ import {
   AlertDescription,
   Spinner,
 } from '@chakra-ui/react';
+import BottomMenu from '../../components/BottomMenu'
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { variables } from '../../config/config';
@@ -113,6 +114,7 @@ const Tags = () => {
       <div style={{display: scroll ? 'flex': 'none'}} className="scrollTop" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
         <ArrowUpIcon />
       </div>
+      <BottomMenu />
     </>
   );
 };

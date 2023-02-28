@@ -22,6 +22,7 @@ import ReactQuill from 'react-quill';
 import EditorToolbar, { modules, formats } from './EditorToolbar';
 import 'react-quill/dist/quill.snow.css';
 import Sidebar from './sidebar';
+import BottomMenu from '../../components/BottomMenu'
 
 const EditArticle = () => {
   let params = useParams()
@@ -334,6 +335,7 @@ const EditArticle = () => {
           </Box>
         </Flex>
       </div>
+      <BottomMenu />
     </>
   );
 };

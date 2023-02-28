@@ -9,6 +9,8 @@ import { variables } from '../../config/config';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Sidebar from './sidebar';
+import BottomMenu from '../../components/BottomMenu'
+
 const Dashboard = () => {
   const [isLoading, setLoading] = useState(true);
   const [categories, setCategories] = useState([]);
@@ -251,6 +253,7 @@ const Dashboard = () => {
         </Flex>
       }
       </div>
+      <BottomMenu />
     </>
   );
 };

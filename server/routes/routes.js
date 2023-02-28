@@ -293,7 +293,7 @@ router.get("/all-categories", function (req, res) {
         data: categories,
       });
     }
-  }).sort({createdAt:-1});
+  });
 });
 
 router.get("/all-tags", function (req, res) {
@@ -336,13 +336,13 @@ router.get("/category-articles/:id", function (req, res) {
         data: articles,
       });
     }
-  });
+  }).sort({createdAt:-1});
 });
 
 router.get("/tag-articles/:tag", async function (req, res) {
-  let articles = await Articles.find({});
+  let articles = await Articles.find({}).sort({createdAt:-1});
   articles = articles?.filter(function (elm) {
-    return elm?.tags?.indexOf(req?.params?.tag.toLowerCase()) >= 0;
+    return elm?.tags?.indexOf(req?.params?.tag) >= 0;
   });
   //console.log(articles, " articles");
   if (articles) {
@@ -355,7 +355,7 @@ router.get("/tag-articles/:tag", async function (req, res) {
 });
 
 router.get("/user-articles/:userId", async function (req, res) {
-  let articles = await Articles.find({ userId: req?.params?.userId });
+  let articles = await Articles.find({ userId: req?.params?.userId }).sort({createdAt:-1});
   if (articles) {
     res.status(201).json({
       success: true,
@@ -388,7 +388,7 @@ router.get("/all-users", function (req, res) {
         data: users,
       });
     }
-  }).select("-password");
+  }).select("-password").sort({createdAt:-1});
 });
 
 const verifyUserLogin = async (email, password) => {

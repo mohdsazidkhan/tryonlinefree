@@ -23,6 +23,7 @@ import {
   WhatsappShareButton,
 } from 'react-share';
 import { ArrowUpIcon } from '@chakra-ui/icons';
+import BottomMenu from '../../components/BottomMenu'
 
 const ArticleDetail = () => {
   let params = useParams()
@@ -274,6 +275,7 @@ const ArticleDetail = () => {
       <div style={{display: scroll ? 'flex': 'none'}} className="scrollTop" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
         <ArrowUpIcon />
       </div>
+      <BottomMenu />
     </>
   );
 };

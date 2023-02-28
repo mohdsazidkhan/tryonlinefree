@@ -70,8 +70,9 @@ const MenuLinks = ({ isOpen, loggedIn }) => {
 
   return (
     <Box
-      display={{ base: isOpen ? 'block' : 'none', md: 'block' }}
-      flexBasis={{ base: '100%', md: 'auto' }}
+      className="primaryMenu" 
+      display={{ base: isOpen ? 'block' : 'none', lg: 'block' }}
+      flexBasis={{ base: '100%', lg: 'auto' }}
     >
       <Stack
         spacing={8}

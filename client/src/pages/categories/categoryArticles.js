@@ -11,6 +11,7 @@ import axios from 'axios';
 import { Link, useLocation } from 'react-router-dom';
 import { variables } from '../../config/config';
 import { ArrowUpIcon } from '@chakra-ui/icons';
+import BottomMenu from '../../components/BottomMenu'
 
 const CategoryArticles = () => {
   const location = useLocation();
@@ -146,6 +147,7 @@ const CategoryArticles = () => {
       <div style={{display: scroll ? 'flex': 'none'}} className="scrollTop" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
         <ArrowUpIcon />
       </div>
+      <BottomMenu />
     </>
   );
 };

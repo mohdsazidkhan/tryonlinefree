@@ -4,7 +4,7 @@ import {
   extendTheme,
 } from '@chakra-ui/react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from './pages/home'
+import Home from './pages/Home'
 import Login from './pages/auth/login'
 import Register from './pages/auth/register'
 import ForgotPassword from './pages/auth/forgotpassword'
@@ -24,7 +24,9 @@ import Categories from './pages/categories/categories';
 import Articles from './pages/posts/articles';
 import Tags from './pages/tags/tags';
 import TagPosts from './pages/tags/tagPosts';
-import NoPage from './pages/nopage';
+import NoPage from './pages/NoPage';
+import SearchPage from './pages/SearchPage';
+import Notifications from './pages/Notifications';
 import EditArticle from './pages/admin/editarticle';
 
 const breakpoints = {
@@ -48,6 +50,8 @@ function App() {
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/register" element={<Register />} />
           <Route exact path="/forgotpassword" element={<ForgotPassword />} />
+          <Route exact path="/search" element={<SearchPage />} />
+          <Route exact path="/notifications" element={<Notifications />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/all-categories" element={<AllCategories />} />
           <Route path="/all-articles" element={<AllArticles />} />

@@ -8,6 +8,7 @@ import {
   Avatar,
   Spinner
 } from '@chakra-ui/react';
+import BottomMenu from '../../components/BottomMenu'
 import axios from 'axios';
 import { Link, useLocation } from 'react-router-dom';
 import { variables } from '../../config/config';
@@ -351,6 +352,7 @@ const Profile = () => {
         )}
       </div>
       }
+      <BottomMenu />
     </>
   );
 };
