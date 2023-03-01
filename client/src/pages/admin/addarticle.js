@@ -23,6 +23,7 @@ import ReactQuill from 'react-quill';
 import EditorToolbar, { modules, formats } from './EditorToolbar';
 import 'react-quill/dist/quill.snow.css';
 import Sidebar from './sidebar';
+import { Helmet } from 'react-helmet';
 
 const AddArticle = () => {
   const navigate = useNavigate();
@@ -169,6 +170,14 @@ const AddArticle = () => {
   imgUrl = imageBase64 ? imageBase64 : require('../../resources/images/article.png')
   return (
     <>
+      <Helmet>
+        <title>Add Articles</title>
+        <meta
+          name="description"
+          content={`Welcome to Tryonlinefree! Add Articles`}
+        />
+        <link rel="canonical" href={window.location.href} />
+      </Helmet>
       {showAlert && (
         <>
           <Alert

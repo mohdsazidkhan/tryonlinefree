@@ -18,35 +18,35 @@ const BottomMenu = () => {
       <NavLink 
         className="menuItem" 
         to="/" 
-        activeClassName="active"
+        activeclassname="active"
       >
         <HomeIcon />
       </NavLink>
       <NavLink 
         className="menuItem" 
         to="/search" 
-        activeClassName="active"
+        activeclassname="active"
       >
         <SearchIcon />
       </NavLink>
       <NavLink
         className="menuItem"
-        to={isLoggedIn ? '/add-article' : '/login'}
-        activeClassName="active"
+        to={isLoggedIn ? '/add-article' : '/register'}
+        activeclassname="active"
       >
         <AddCircleIcon />
       </NavLink>
       <NavLink
         className="menuItem"
         to="/notifications"
-        activeClassName="active"
+        activeclassname="active"
       >
         <NotificationsIcon />
       </NavLink>
       <NavLink
         className="menuItem"
         to={isLoggedIn ? '/profile' : '/login'}
-        activeClassName="active"
+        activeclassname="active"
       >
         <AccountCircleIcon />
       </NavLink>

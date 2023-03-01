@@ -24,6 +24,7 @@ import {
 } from 'react-share';
 import { ArrowUpIcon } from '@chakra-ui/icons';
 import BottomMenu from '../../components/BottomMenu'
+import { Helmet } from 'react-helmet';
 
 const ArticleDetail = () => {
   let params = useParams()
@@ -36,7 +37,10 @@ const ArticleDetail = () => {
   const [article, setArticle] = useState([]);
   const [scroll, setScroll] = useState(false);
 
-  const getArticle = () => {
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      setScroll(window.scrollY > 100);
+    });
     axios
       .get(`${variables.BASE_URL}/article/${articleId}`)
       .then(response => {
@@ -45,6 +49,7 @@ const ArticleDetail = () => {
           setMessage(response.data.message);
           seErrorType(response.data.success);
           setArticle(response.data.data);
+          document.title = response?.data?.data?.title;
           setLoading(false)
         }
       })
@@ -60,13 +65,6 @@ const ArticleDetail = () => {
           }, 3000);
         }
       });
-  };
-
-  useEffect(() => {
-    window.addEventListener("scroll", () => {
-      setScroll(window.scrollY > 100);
-    });
-    getArticle();
     
   }, []);
 
@@ -76,6 +74,14 @@ const ArticleDetail = () => {
   const shareUrl = window?.location.href ?? '';
   return (
     <>
+      <Helmet>
+        <title>{document.title}</title>
+        <meta
+          name="description"
+          content="Welcome to Tryonlinefree! Here you can find all blog categories!"
+        />
+        <link rel="canonical" href={window.location.href} />
+      </Helmet>
       {showAlert && (
         <>
           <Alert
@@ -108,7 +114,7 @@ const ArticleDetail = () => {
             <div className="flex flex-col">
               <Link
                 to={`/category/${article?.categoryName?.toLowerCase()}`}
-                state={{ id: article?.categoryId }}
+                state={{ id: article?.categoryId, name: article?.categoryName }}
                 className="text-green-600 mt-2 text-lg"
               >
                 {article?.categoryName}

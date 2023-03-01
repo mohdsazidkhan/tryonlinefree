@@ -23,6 +23,8 @@ import { EditIcon, DeleteIcon, ArrowUpIcon } from '@chakra-ui/icons';
 import { variables } from '../../config/config';
 import axios from 'axios';
 import Sidebar from './sidebar';
+import { Helmet } from 'react-helmet';
+
 const AllTags = () => {
   const [isLoading, setLoading] = useState(true);
   const [showAlert, setShowAlert] = useState(false);
@@ -78,6 +80,14 @@ const AllTags = () => {
 
   return (
     <>
+      <Helmet>
+        <title>All Tags</title>
+        <meta
+          name="description"
+          content={`Welcome to Tryonlinefree! All Tags`}
+        />
+        <link rel="canonical" href={window.location.href} />
+      </Helmet>
       {showAlert && (
         <>
           <Alert

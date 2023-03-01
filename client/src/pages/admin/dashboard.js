@@ -9,6 +9,7 @@ import { variables } from '../../config/config';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Sidebar from './sidebar';
+import { Helmet } from 'react-helmet';
 import BottomMenu from '../../components/BottomMenu'
 
 const Dashboard = () => {
@@ -122,6 +123,14 @@ const Dashboard = () => {
   }, []);
   return (
     <>
+      <Helmet>
+        <title>Dashboard</title>
+        <meta
+          name="description"
+          content={`Welcome to Tryonlinefree! Dashboard`}
+        />
+        <link rel="canonical" href={window.location.href} />
+      </Helmet>
     {showAlert && (
         <>
           <Alert

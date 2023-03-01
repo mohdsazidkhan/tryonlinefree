@@ -12,6 +12,7 @@ import BottomMenu from '../../components/BottomMenu'
 import axios from 'axios';
 import { Link, useLocation } from 'react-router-dom';
 import { variables } from '../../config/config';
+import { Helmet } from 'react-helmet';
 
 const Profile = () => {
   const [isLoading, setLoading] = useState(true);
@@ -83,6 +84,14 @@ const Profile = () => {
   }, []);
   return (
     <>
+      <Helmet>
+        <title>Profile</title>
+        <meta
+          name="description"
+          content={`Welcome to Tryonlinefree User Profile`}
+        />
+        <link rel="canonical" href={window.location.href} />
+      </Helmet>
       {showAlert && (
         <>
           <Alert
@@ -208,10 +217,10 @@ const Profile = () => {
                   <path
                     fill="none"
                     stroke="#fff"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-miterlimit="10"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeMiterlimit="10"
+                    strokeWidth="2"
                     d="M30,11H18c-3.9,0-7,3.1-7,7v12c0,3.9,3.1,7,7,7h12c3.9,0,7-3.1,7-7V18C37,14.1,33.9,11,30,11z"
                   />
                   <circle cx="31" cy="16" r="1" fill="#fff" />
@@ -223,10 +232,10 @@ const Profile = () => {
                     r="6"
                     fill="none"
                     stroke="#fff"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-miterlimit="10"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeMiterlimit="10"
+                    strokeWidth="2"
                   />
                 </g>
               </svg>
@@ -315,7 +324,7 @@ const Profile = () => {
                     <Link
                       className="text-green-500 font-semibold cursor-pointer mt-2"
                       to={`/category/${item?.categoryName.toLowerCase()}`}
-                      state={{ id: item.categoryId }}
+                      state={{ id: item.categoryId, name: item?.categoryName }}
                     >
                       {item?.categoryName}
                     </Link>

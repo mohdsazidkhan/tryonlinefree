@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 import { variables } from '../../config/config';
 import { ArrowUpIcon } from '@chakra-ui/icons';
 import BottomMenu from '../../components/BottomMenu'
+import { Helmet } from 'react-helmet';
 
 const Users = () => {
   const [isLoading, setLoading] = useState(true);
@@ -56,6 +57,14 @@ const Users = () => {
   }, []);
   return (
     <>
+      <Helmet>
+        <title>Users</title>
+        <meta
+          name="description"
+          content={`Welcome to Tryonlinefree! Here you can find all users!`}
+        />
+        <link rel="canonical" href={window.location.href} />
+      </Helmet>
       {showAlert && (
         <>
           <Alert

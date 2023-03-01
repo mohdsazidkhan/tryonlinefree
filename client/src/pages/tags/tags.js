@@ -12,6 +12,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { variables } from '../../config/config';
 import { ArrowUpIcon } from '@chakra-ui/icons';
+import { Helmet } from 'react-helmet';
 
 const Tags = () => {
   const [isLoading, setLoading] = useState(true);
@@ -67,6 +68,14 @@ const Tags = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Tags</title>
+        <meta
+          name="description"
+          content={`Welcome to Tryonlinefree! Here you can find all tags!`}
+        />
+        <link rel="canonical" href={window.location.href} />
+      </Helmet>
       {showAlert && (
         <>
           <Alert

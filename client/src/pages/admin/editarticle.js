@@ -23,6 +23,7 @@ import EditorToolbar, { modules, formats } from './EditorToolbar';
 import 'react-quill/dist/quill.snow.css';
 import Sidebar from './sidebar';
 import BottomMenu from '../../components/BottomMenu'
+import { Helmet } from 'react-helmet';
 
 const EditArticle = () => {
   let params = useParams()
@@ -202,6 +203,14 @@ const EditArticle = () => {
   : require('../../resources/images/article.png')
   return (
     <>
+      <Helmet>
+        <title>Edit Article</title>
+        <meta
+          name="description"
+          content={`Welcome to Tryonlinefree! Edit Article`}
+        />
+        <link rel="canonical" href={window.location.href} />
+      </Helmet>
       {showAlert && (
         <>
           <Alert

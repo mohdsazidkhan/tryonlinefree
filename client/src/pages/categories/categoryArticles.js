@@ -12,10 +12,12 @@ import { Link, useLocation } from 'react-router-dom';
 import { variables } from '../../config/config';
 import { ArrowUpIcon } from '@chakra-ui/icons';
 import BottomMenu from '../../components/BottomMenu'
+import { Helmet } from 'react-helmet';
 
 const CategoryArticles = () => {
   const location = useLocation();
   let categoryId = location?.state?.id;
+  let categoryName = location?.state?.name;
   const [isLoading, setLoading] = useState(true);
   const [showAlert, setShowAlert] = useState(false);
   const [errorType, seErrorType] = useState(false);
@@ -58,6 +60,14 @@ const CategoryArticles = () => {
   }, []);
   return (
     <>
+      <Helmet>
+        <title>{categoryName} Articles</title>
+        <meta
+          name="description"
+          content={`Welcome to Tryonlinefree ${categoryName} Articles`}
+        />
+        <link rel="canonical" href={window.location.href} />
+      </Helmet>
       {showAlert && (
         <>
           <Alert
@@ -108,7 +118,7 @@ const CategoryArticles = () => {
                     <Link
                       className="text-green-500 font-semibold cursor-pointer mt-2"
                       to={`/category/${item?.categoryName.toLowerCase()}`}
-                      state={{ id: item._id }}
+                      state={{ id: item._id, name: item?.categoryName }}
                     >
                       {item?.categoryName}
                     </Link>

@@ -22,6 +22,8 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { variables } from '../../config/config';
 import Sidebar from './sidebar';
+import { Helmet } from 'react-helmet';
+
 const AllCategories = () => {
   const [isLoading, setLoading] = useState(true);
   const [showAlert, setShowAlert] = useState(false);
@@ -65,6 +67,14 @@ const AllCategories = () => {
   }, []);
   return (
     <>
+      <Helmet>
+        <title>All Categories</title>
+        <meta
+          name="description"
+          content={`Welcome to Tryonlinefree! All Categories`}
+        />
+        <link rel="canonical" href={window.location.href} />
+      </Helmet>
       {showAlert && (
         <>
           <Alert

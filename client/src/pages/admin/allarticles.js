@@ -32,6 +32,7 @@ import axios from 'axios';
 import { variables } from '../../config/config';
 import moment from 'moment';
 import Sidebar from './sidebar';
+import { Helmet } from 'react-helmet';
 
 const AllArticles = () => {
   const [isLoading, setLoading] = useState(true);
@@ -138,6 +139,14 @@ const AllArticles = () => {
   }, []);
   return (
     <>
+      <Helmet>
+        <title>All Articles</title>
+        <meta
+          name="description"
+          content={`Welcome to Tryonlinefree! All Articles`}
+        />
+        <link rel="canonical" href={window.location.href} />
+      </Helmet>
       {showAlert && (
         <>
           <Alert

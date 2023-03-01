@@ -12,6 +12,7 @@ import {
   Avatar,
   FormControl
 } from "@chakra-ui/react";
+import {Helmet} from "react-helmet";
 import { FaUserAlt } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 
@@ -21,6 +22,14 @@ const ForgotPassword = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Forgot Password</title>
+        <meta
+          name="description"
+          content="Welcome to Tryonlinefree! Here you can reset your Password!"
+        />
+        <link rel="canonical" href={window.location.href} />
+      </Helmet>
     <Navbar />
     <Flex
       flexDirection="column"

@@ -25,6 +25,8 @@ import { useNavigate } from 'react-router-dom';
 import { FaUserAlt, FaLock } from 'react-icons/fa';
 import { variables } from '../../config/config';
 import './login.css';
+import {Helmet} from "react-helmet";
+import BottomMenu from '../../components/BottomMenu'
 
 const CFaUserAlt = chakra(FaUserAlt);
 const CFaLock = chakra(FaLock);
@@ -83,6 +85,14 @@ const Login = () => {
   };
   return (
     <>
+      <Helmet>
+        <title>Login</title>
+        <meta
+          name="description"
+          content="Welcome to Tryonlinefree! Here you can login to your account!"
+        />
+        <link rel="canonical" href={window.location.href} />
+      </Helmet>
       {showAlert && (
         <>
           <Alert
@@ -106,9 +116,10 @@ const Login = () => {
       <Flex
         flexDirection="column"
         width="100wh"
-        height="100vh"
+        height="auto"
         justifyContent="center"
         alignItems="center"
+        marginTop={2}
       >
         <Stack
           flexDir="column"
@@ -177,13 +188,15 @@ const Login = () => {
             </form>
           </Box>
         </Stack>
-        <Box>
+        <div
+        className='mb-5'>
           Create an account ?{' '}
           <Link style={{ color: '#007eff' }} to="/register">
             Sign Up
           </Link>
-        </Box>
+        </div>
       </Flex>
+      <BottomMenu />
     </>
   );
 };

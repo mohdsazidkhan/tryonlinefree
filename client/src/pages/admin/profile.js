@@ -25,11 +25,10 @@ import { variables } from '../../config/config';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Sidebar from './sidebar';
-import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 const Profile = () => {
   const [isLoading, setLoading] = useState(true);
-  const navigate = useNavigate();
   const [showAlert, setShowAlert] = useState(false);
   const [errorType, seErrorType] = useState(false);
   const [message, setMessage] = useState('');
@@ -165,6 +164,14 @@ const Profile = () => {
   };
   return (
     <>
+      <Helmet>
+        <title>Edit Profile</title>
+        <meta
+          name="description"
+          content={`Welcome to Tryonlinefree! Edit Profile`}
+        />
+        <link rel="canonical" href={window.location.href} />
+      </Helmet>
       {showAlert && (
         <>
           <Alert

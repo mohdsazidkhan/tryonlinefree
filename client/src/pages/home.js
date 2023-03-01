@@ -13,6 +13,7 @@ import { Link } from 'react-router-dom';
 import { variables } from '../config/config';
 import { ArrowUpIcon } from '@chakra-ui/icons';
 import BottomMenu from '../components/BottomMenu'
+import { Helmet } from 'react-helmet';
 
 const Home = () => {
   const [isLoading, setLoading] = useState(true);
@@ -122,6 +123,14 @@ const Home = () => {
   }, []);
   return (
     <>
+      <Helmet>
+        <title>Tryonlinefree - Share your knowledge world wide</title>
+        <meta
+          name="description"
+          content={`Tryonlinefree is an open platform where readers can get best information and where expert can share their knowledge on our website on any topic`}
+        />
+        <link rel="canonical" href={window.location.href} />
+      </Helmet>
       {showAlert && (
         <>
           <Alert
@@ -200,7 +209,7 @@ const Home = () => {
                       <Link
                         className="text-green-500 font-semibold cursor-pointer mt-2"
                         to={`/category/${item?.categoryName.toLowerCase()}`}
-                        state={{ id: item.categoryId }}
+                        state={{ id: item.categoryId, name: item?.categoryName }}
                       >
                         {item?.categoryName}
                       </Link>

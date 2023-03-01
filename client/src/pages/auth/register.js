@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Navbar from '../../components/Navbar';
 import { Link } from 'react-router-dom';
+import BottomMenu from '../../components/BottomMenu'
 import {
   Flex,
   Heading,
@@ -23,6 +24,7 @@ import { FaUserAlt, FaLock, FaPhone, FaEnvelope } from 'react-icons/fa';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { variables } from '../../config/config'
+import {Helmet} from "react-helmet";
 
 const CFaUserAlt = chakra(FaUserAlt);
 const CFaLock = chakra(FaLock);
@@ -81,6 +83,14 @@ const Register = () => {
   };
   return (
     <>
+      <Helmet>
+        <title>Register</title>
+        <meta
+          name="description"
+          content="Welcome to Tryonlinefree! Here you can create a new account!"
+        />
+        <link rel="canonical" href={window.location.href} />
+      </Helmet>
       {showAlert && 
        <>
         <Alert
@@ -105,9 +115,10 @@ const Register = () => {
       <Flex
         flexDirection="column"
         width="100wh"
-        height="100vh"
+        height="auto"
         justifyContent="center"
         alignItems="center"
+        marginTop={2}
       >
         <Stack
           flexDir="column"
@@ -200,13 +211,14 @@ const Register = () => {
             </form>
           </Box>
         </Stack>
-        <Box>
+        <div style={{marginBottom: 80}}>
           Already Registered ?{' '}
           <Link style={{ color: '#007eff' }} to="/login">
             Login
           </Link>
-        </Box>
+        </div>
       </Flex>
+      <BottomMenu />
     </>
   );
 };

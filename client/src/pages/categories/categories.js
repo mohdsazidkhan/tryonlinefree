@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 import { variables } from '../../config/config';
 import { ArrowUpIcon } from '@chakra-ui/icons';
 import BottomMenu from '../../components/BottomMenu'
+import {Helmet} from "react-helmet";
 
 const Categories = () => {
   const [isLoading, setLoading] = useState(true);
@@ -56,6 +57,14 @@ const Categories = () => {
   }, []);
   return (
     <>
+      <Helmet>
+        <title>Categories</title>
+        <meta
+          name="description"
+          content="Welcome to Tryonlinefree! Here you can find all blog categories!"
+        />
+        <link rel="canonical" href={window.location.href} />
+      </Helmet>
       {showAlert && (
         <>
           <Alert
@@ -88,7 +97,7 @@ const Categories = () => {
             {categories?.map((item, index) => (
               <Link
                 to={`/category/${item?.name.toLowerCase()}`}
-                state={{ id: item._id }}
+                state={{ id: item._id, name: item?.name }}
                 key={index}
                 className="rounded-xl border p-5 text-center category cursor-pointer"
               >

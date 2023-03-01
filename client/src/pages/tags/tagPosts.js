@@ -12,6 +12,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { variables } from '../../config/config';
 import { ArrowUpIcon } from '@chakra-ui/icons';
 import BottomMenu from '../../components/BottomMenu'
+import { Helmet } from 'react-helmet';
 
 const TagPosts = () => {
   const location = useLocation();
@@ -84,6 +85,14 @@ const TagPosts = () => {
   }, []);
   return (
     <>
+      <Helmet>
+        <title>{tag.charAt(0).toUpperCase() + tag.slice(1)} Articles</title>
+        <meta
+          name="description"
+          content={`Welcome to Tryonlinefree ${tag.charAt(0).toUpperCase() + tag.slice(1)} Articles`}
+        />
+        <link rel="canonical" href={window.location.href} />
+      </Helmet>
       {showAlert && (
         <>
           <Alert
@@ -134,7 +143,7 @@ const TagPosts = () => {
                     <Link
                       className="text-green-500 font-semibold cursor-pointer mt-2"
                       to={`/category/${item?.categoryName.toLowerCase()}`}
-                      state={{ id: item.categoryId }}
+                      state={{ id: item.categoryId, name: item?.categoryName }}
                     >
                       {item?.categoryName}
                     </Link>
