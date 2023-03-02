@@ -152,7 +152,7 @@ const Home = () => {
       )}
 
       <Navbar />
-      <div className="container mx-auto py-5">
+      <div className="container mx-auto mb-10 py-5">
         {isLoading ? (
           <div className="text-center p-5">
             <Spinner />

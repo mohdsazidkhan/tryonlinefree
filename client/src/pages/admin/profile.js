@@ -193,7 +193,7 @@ const Profile = () => {
       )}
 
       <Navbar />
-      <div className='container mt-5 mx-auto'>
+      <div className='container mt-5 mx-auto mb-10'>
       {isLoading 
       ? 
       <div className="text-center p-5">

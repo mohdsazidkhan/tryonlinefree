@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 import SearchIcon from '@mui/icons-material/Search';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import NotificationsIcon from '@mui/icons-material/Notifications';
+import PeopleIcon from '@mui/icons-material/People';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const BottomMenu = () => {
@@ -38,10 +38,10 @@ const BottomMenu = () => {
       </NavLink>
       <NavLink
         className="menuItem"
-        to="/notifications"
+        to="/users"
         activeclassname="active"
       >
-        <NotificationsIcon />
+        <PeopleIcon />
       </NavLink>
       <NavLink
         className="menuItem"

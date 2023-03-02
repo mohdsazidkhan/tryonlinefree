@@ -3,6 +3,7 @@ import { Box, Button, Stack, Container } from '@chakra-ui/react';
 import {Link} from 'react-router-dom'
 import { ColorModeSwitcher } from '../ColorModeSwitcher';
 import '../components/Navbar.css'
+import { SearchIcon } from '@chakra-ui/icons';
 
 const NavBar = props => {
 
@@ -25,7 +26,10 @@ const NavBar = props => {
       </Link>
       <MenuToggle toggle={toggle} isOpen={isOpen} />
       <MenuLinks isOpen={isOpen} loggedIn={loggedIn}/>
-      <ColorModeSwitcher justifySelf="flex-end" />
+      <div justifySelf="flex-end">
+        <Link to="/search" className='desktopSearch mr-2'><SearchIcon /></Link>
+        <ColorModeSwitcher  />
+      </div>
     </div>
   );
 };

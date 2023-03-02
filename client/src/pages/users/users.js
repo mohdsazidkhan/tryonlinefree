@@ -85,7 +85,7 @@ const Users = () => {
         </>
       )}
       <Navbar />
-      <div className="container mx-auto py-5 m-5">
+      <div className="container mx-auto py-5 mb-10">
       {isLoading 
       ? 
       <div className="text-center p-5">
