@@ -26,7 +26,7 @@ const NavBar = props => {
       </Link>
       <MenuToggle toggle={toggle} isOpen={isOpen} />
       <MenuLinks isOpen={isOpen} loggedIn={loggedIn}/>
-      <div justifySelf="flex-end">
+      <div justifyself="flex-end">
         <Link to="/search" className='desktopSearch mr-2'><SearchIcon /></Link>
         <ColorModeSwitcher  />
       </div>
@@ -90,6 +90,7 @@ const MenuLinks = ({ isOpen, loggedIn }) => {
         <Link to="/categories"> Categories </Link>
         <Link to="/tags"> Tags </Link>
         <Link to="/users"> Users </Link>
+        <Link to="/contact"> Contact </Link>
 
         {!loggedIn ?
         <>

@@ -5,8 +5,10 @@ import { variables } from '../config/config';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Spinner } from '@chakra-ui/react';
+import NavBar from '../components/Navbar';
 
 const SearchPage = () => {
+
   const [articles, setArticles] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const [showAlert, setShowAlert] = useState(false);
@@ -62,12 +64,14 @@ const SearchPage = () => {
   }, []);
   return (
     <>
+      <NavBar />
       {isLoading ? (
         <div className="text-center p-5">
           <Spinner />
         </div>
       ) : (
         <>
+        <div className="container mx-auto mb-10 py-5">
           <div className="searchInput">
             <input
               type="text"
@@ -179,6 +183,8 @@ const SearchPage = () => {
                 );
               })}
             </div>
+          </div>
+          
           </div>
           <div
             style={{ display: scroll ? 'flex' : 'none' }}

@@ -27,6 +27,10 @@ import TagPosts from './pages/tags/tagPosts';
 import NoPage from './pages/NoPage';
 import SearchPage from './pages/SearchPage';
 import EditArticle from './pages/admin/editarticle';
+import About from './pages/About';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import Disclaimer from './pages/Disclaimer';
+import Contact from './pages/Contact';
 
 const breakpoints = {
   sm: '320px',
@@ -46,6 +50,10 @@ function App() {
       <BrowserRouter basename='/'>
         <Routes>
           <Route exact path='/' element={<Home />} />
+          <Route exact path='/about' element={<About />} />
+          <Route exact path='/contact' element={<Contact />} />
+          <Route exact path='/privacy-policy' element={<PrivacyPolicy />} />
+          <Route exact path='/disclaimer' element={<Disclaimer />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/register" element={<Register />} />
           <Route exact path="/forgotpassword" element={<ForgotPassword />} />

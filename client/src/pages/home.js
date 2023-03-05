@@ -13,6 +13,7 @@ import { Link } from 'react-router-dom';
 import { variables } from '../config/config';
 import { ArrowUpIcon } from '@chakra-ui/icons';
 import BottomMenu from '../components/BottomMenu'
+import Footer from '../components/Footer'
 import { Helmet } from 'react-helmet';
 
 const Home = () => {
@@ -251,7 +252,7 @@ const Home = () => {
       >
         <ArrowUpIcon />
       </div>
-
+      <Footer />
       <BottomMenu />
     </>
   );

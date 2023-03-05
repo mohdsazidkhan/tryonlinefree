@@ -1,5 +1,6 @@
 const express = require("express");
 const User = require("../models/users");
+const Contact = require("../models/contact");
 const Categories = require("../models/categories");
 const Articles = require("../models/articles");
 const router = express.Router();
@@ -9,6 +10,25 @@ const salt = 10;
 const JWT_SECRET = process.env.JWT_SECRET;
 const cloudinary = require("../cloudinary");
 const uploader = require("../multer");
+
+router.post("/contact", async (req, res) => {
+    if (req.body) {
+      let contact = new Contact(req.body);
+      contact.save().then((contact) => {
+        res.status(201).json({
+          success: true,
+          message: "Query Submitted Successfully!",
+          data: contact,
+        });
+      })
+      .catch((error) => {
+        res.status(400).json({
+          error: error,
+          success: false,
+        });
+      });
+    }
+});
 
 router.post("/register", async (req, res) => {
   let { name, phone, email, password } = req.body;

@@ -20,7 +20,7 @@ menu {
 }
 .articleDetailItem p {
   font-size: 17px !important;
-  letter-spacing: .5px;
+  letter-spacing: 0.5px;
 }
 .chakra-ui-light td {
   color: black;
@@ -113,7 +113,7 @@ menu {
 .fullscreenEditor .quill {
   height: 50vh;
 }
-.allCategories{
+.allCategories {
   display: flex;
   overflow-x: scroll;
   justify-content: flex-start;
@@ -121,26 +121,26 @@ menu {
   flex-wrap: nowrap;
   white-space: nowrap;
   padding: 0;
-  transition: all .3s;
-  -webkit-transition: all .3s;
-  -moz-transition: all .3s;
-  -ms-transition: all .3s;
-  -o-transition: all .3s;
+  transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
 }
-.fixedTabs{
+.fixedTabs {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   padding: 10px;
   background: rgb(0 0 0);
-  transition: all .3s;
-  -webkit-transition: all .3s;
-  -moz-transition: all .3s;
-  -ms-transition: all .3s;
-  -o-transition: all .3s;
+  transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
 }
-.fixedTabs button{
+.fixedTabs button {
   font-size: 14px;
 }
 .fullscreen,
@@ -197,30 +197,27 @@ menu {
   background-size: cover;
   background-position: center;
 }
-.searchArticleItem{
+.searchArticleItem {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
 }
-.searchArticles{
-  margin: 55px 10px;
+.searchArticles {
+  margin: 15px 0 55px 0;
 }
-.searchInput{
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+.searchInput {
+  position: relative;
 }
-.searchInput input{
+.searchInput input {
   box-shadow: 0 1px 5px 0 rgb(0 0 0 / 25%);
   width: 100%;
   border: 1px solid #ccc;
   border-radius: 0px;
   padding: 10px 15px;
 }
-.searchArticleBg .articleImg{
+.searchArticleBg .articleImg {
   background-position: center;
   background-size: cover;
   width: 80px;
@@ -342,13 +339,13 @@ menu {
   margin: 5px 0;
   display: inline-block;
 }
-.chakra-ui-light .activeClass{
-  background: rgb(179 255 207) !important
+.chakra-ui-light .activeClass {
+  background: rgb(179 255 207) !important;
 }
-.chakra-ui-dark .activeClass{
-  background: rgb(30, 173, 83) !important
+.chakra-ui-dark .activeClass {
+  background: rgb(30, 173, 83) !important;
 }
-.scrollTop{
+.scrollTop {
   position: fixed;
   cursor: pointer;
   bottom: 50px;
@@ -362,28 +359,61 @@ menu {
   border-radius: 4px;
   box-shadow: 0 0 3px rgb(0 0 0);
 }
-.bottomMobileMenu{
+.bottomMobileMenu {
   display: none;
 }
-.searchArticles.mobile{
+.searchArticles.mobile {
   display: none;
 }
-.searchPosts.desktop{
+.searchPosts.desktop {
   display: block;
   margin-top: 50px;
 }
-.desktopSearch{
+.desktopSearch {
   display: inline-block;
 }
+.bottomFooter{
+  background: #11161e;
+  text-align: center;
+}
+.bottomFooter .footerLink{
+  padding: 8px 10px;
+  font-size: 13px;
+  display: inline-block;
+}
+.about h1,
+.about h2,
+.about h3,
+.about h4,
+.about h5,
+.about h6,
+.privacyPolicy h1,
+.privacyPolicy h2,
+.privacyPolicy h3,
+.privacyPolicy h4,
+.privacyPolicy h5,
+.privacyPolicy h6,
+.disclaimer h1,
+.disclaimer h2,
+.disclaimer h3,
+.disclaimer h4,
+.disclaimer h5,
+.disclaimer h6 {
+  font-size: revert;
+  font-weight: revert;
+}
 @media screen and (max-width: 768px) {
-  .searchArticles.mobile{
+  .bottomFooter{
+    margin-bottom: 100px;
+  }
+  .searchArticles.mobile {
     display: block;
   }
   .searchPosts.desktop,
-  .desktopSearch{
+  .desktopSearch {
     display: none;
   }
-  .bottomMobileMenu{
+  .bottomMobileMenu {
     position: fixed;
     bottom: 0;
     left: 0;
@@ -393,24 +423,24 @@ menu {
     align-items: center;
     height: auto;
   }
-  .chakra-ui-dark .bottomMobileMenu{
+  .chakra-ui-dark .bottomMobileMenu {
     background: #060c16;
   }
-  .chakra-ui-light .bottomMobileMenu{
+  .chakra-ui-light .bottomMobileMenu {
     background: #edf2f7;
     box-shadow: 0 -1px 5px 0 rgb(0 0 0 / 22%);
   }
-  .chakra-ui-dark .bottomMobileMenu .menuItem.active{
+  .chakra-ui-dark .bottomMobileMenu .menuItem.active {
     background: rgb(30 173 83);
   }
-  .chakra-ui-light .bottomMobileMenu .menuItem.active{
+  .chakra-ui-light .bottomMobileMenu .menuItem.active {
     background: rgb(179 255 207);
   }
-  .bottomMobileMenu .menuItem{
+  .bottomMobileMenu .menuItem {
     padding: 10px 15px;
     cursor: pointer;
   }
-  .menuBar{
+  .menuBar {
     position: absolute;
     top: 17px;
     right: 70px;
@@ -470,7 +500,7 @@ menu {
     position: absolute;
     right: 24px;
     z-index: 99;
-    display: block !important
+    display: block !important;
   }
   .container {
     padding: 10px;
@@ -479,9 +509,8 @@ menu {
     width: 100%;
     height: 200px;
   }
-  .articleDetailItem h1{
+  .articleDetailItem h1 {
     font-size: 26px !important;
     font-weight: 600;
   }
-  
 }
